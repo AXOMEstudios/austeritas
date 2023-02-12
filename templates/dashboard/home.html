@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - dashboard home
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title is-1">
+            Dashboard - home
+        </h1>
+        <hr>
+        <h2 class="subtitle">What do you want to do?</h2>
+        <div class="columns">
+            <div class="column">
+                <a href="{{url_for('dashboard.kick')}}">
+                    <div class="box">
+                        <h1 class="title">Kick</h1>
+                        <p>Kicking a player from the server temporarily removes the person from the game, but it's possible to re-join immediately.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="{{url_for('dashboard.ban')}}">
+                    <div class="box">
+                        <h1 class="title">Ban</h1>
+                        <p>Banning a player removes the access to the server for a specific amount of time or even permanently. The player can join again after the ban expired or was appealed.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="column">
+                <a href="{{url_for('dashboard.etc')}}">
+                    <div class="box">
+                        <h1 class="title">Miscellaneous</h1>
+                        <p>Set miscellaneous options for general server management.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - dashboard home
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title is-1">
+            Warned players
+        </h1>
+        
+        <table>
+            {% for player, warns in warnings.items() %}
+                <tr>
+                    <td>{{player}}</td>
+                    <td>{{warns}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</section>
+
+{% endblock content %}

@@ -1,8 +1,11 @@
 from functools import wraps
 from flask import g, redirect
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous.url_safe import URLSafeTimedSerializer as Serializer
 from dotenv import load_dotenv
 from os import getenv
+from json import dump, load
+from .constants import CONFIG_FILENAME
+from string import ascii_letters, digits
 
 load_dotenv()
 
@@ -37,4 +40,25 @@ def validate_csrf_token(token, session_token, action):
     if data["user"] != str(session_token["user"]) or data["action"] != action:
         return False
 
+    return True
+
+def write_json(json, filename=CONFIG_FILENAME):
+    with open(filename, "w") as f:
+        dump(json, f)
+        return json
+
+def load_json(filename=CONFIG_FILENAME):
+    with open(filename, "r") as f:
+        return load(f)
+
+def validate_player_name(name):
+    VALID_SYMBOLS = list(ascii_letters + digits + " ")
+
+    if len(name) > 15 and len(name) < 3:
+        return False
+
+    for letter in list(name):
+        if not letter in VALID_SYMBOLS:
+            return False
+    
     return True
