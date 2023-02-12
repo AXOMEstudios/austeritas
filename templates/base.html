@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Austeritas mod assisting system">
+
+      <link rel="stylesheet" href="/static/assets/bulma.min.css">
+      <link rel="stylesheet" href="/static/assets/styles.css">
+      <link rel="icon" href="/static/icons/icon.png">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+
+      <script src="/static/assets/script.js"></script>
+
+      {% block head %}
+      {% endblock %}
+
+      <title>
+          {% block title %}
+          {% endblock %}
+      </title>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img src="/static/icons/icon.png" width="28" height="28" alt="Austeritas">
+        </a>
+    
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavigationBar">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="mainNavigationBar" class="navbar-menu">
+        <div class="navbar-start">
+          {% if g.user %}
+            <a class="navbar-item" href=""> <!-- TODO -->
+              Kick
+            </a>
+            <a class="navbar-item" href="">
+              Ban
+            </a>
+            <a class="navbar-item" href="">
+              etc.
+            </a>
+          {% else %}
+            
+          {% endif %}
+        </div>
+    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              {% if not g.user %}
+                <a class="button" href="">
+                  <strong>Log in</strong>
+                </a>
+              {% else %}
+                <a class="button" href="">
+                    <strong>Log out</strong>
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flashes p-3">
+          {% for category, message in messages %}
+            <article class="message is-{{ category }}">
+              <div class="message-body">
+                {{message}}
+              </div>
+            </article>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}
+    {% endblock content %}
+
+  </body>
+</html>
