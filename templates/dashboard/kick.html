@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - kick
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+    <div class="container content">
+        <h1 class="title is-1">
+            Kick a player
+        </h1><hr>
+        
+        <h2 class="subtitle">By specific gamertag</h2>
+        <form action="{{url_for('dashboard.run_kick')}}" method="post">
+            <input class="input my-1" type="text" placeholder="gamertag" name="player">
+            <label class="checkbox my-2">
+              <input type="checkbox" name="remember">
+                Add player name to list of known people
+            </label><br>
+            <label class="checkbox my-2">
+                <input type="checkbox" name="warn">
+                  Add warning to player
+              </label><br>
+            <input class="button is-danger my-1" value="Kick" type="submit">
+        </form><hr>
+
+        <h2>By selection from list of known players</h2>
+        {% for player in list_of_players %}
+            <form action="{{url_for('dashboard.run_kick')}}" method="post" class="my-1">
+                <input type="hidden" name="player" value="{{player}}">
+                <input type="submit" class="button is-fullwidth" value="{{player}}">
+            </form>
+        {% endfor %}
+        <a href="{{url_for('dashboard.etc')}}">
+            <button class="button is-success">
+                Edit list
+            </button>
+        </a>
+    </div>
+</section>
+
+{% endblock content %}

@@ -42,17 +42,20 @@
       <div id="mainNavigationBar" class="navbar-menu">
         <div class="navbar-start">
           {% if g.user %}
-            <a class="navbar-item" href=""> <!-- TODO -->
+            <a class="navbar-item" href="{{url_for('dashboard.kick')}}">
               Kick
             </a>
-            <a class="navbar-item" href="">
+            <a class="navbar-item" href="{{url_for('dashboard.ban')}}">
               Ban
             </a>
-            <a class="navbar-item" href="">
-              etc.
+            <a class="navbar-item" href="{{url_for('dashboard.warnings')}}">
+              Warnings
+            </a>
+            <a class="navbar-item" href="{{url_for('dashboard.etc')}}">
+              Miscellaneous
             </a>
           {% else %}
-            
+          
           {% endif %}
         </div>
     
@@ -60,12 +63,12 @@
           <div class="navbar-item">
             <div class="buttons">
               {% if not g.user %}
-                <a class="button" href="">
+                <a class="button" href="{{url_for('auth.login')}}">
                   <strong>Log in</strong>
                 </a>
               {% else %}
-                <a class="button" href="">
-                    <strong>Log out</strong>
+                <a class="button" href="{{url_for('auth.logout')}}">
+                    logged in as {{g.user}} (<strong>Log out</strong>)
                 </a>
               {% endif %}
             </div>
