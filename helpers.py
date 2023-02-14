@@ -52,7 +52,7 @@ def load_json(filename=CONFIG_FILENAME):
         return load(f)
 
 def validate_player_name(name):
-    VALID_SYMBOLS = list(ascii_letters + digits + " ")
+    VALID_SYMBOLS = list(ascii_letters + digits + " " + "_")
 
     if len(name) > 15 and len(name) < 3:
         return False
