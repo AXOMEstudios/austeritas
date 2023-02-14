@@ -5,10 +5,12 @@ from .dashboard import dashboard
 from .main import main
 from .constants import DEBUG, HAS_HTTPS
 
+from .internals.clock import init_clock
 from dotenv import load_dotenv
 from os import getenv
 
 load_dotenv()
+init_clock()
 
 def create_app():
     app = Flask(__name__)

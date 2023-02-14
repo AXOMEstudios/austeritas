@@ -10,41 +10,46 @@
         <h1 class="title is-1">
             Ban a player
         </h1><hr>
-        <h2 class="subtitle">By specific gamertag</h2>
-        <form action="{{url_for('dashboard.run_ban')}}" method="post">
-            <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
-            <div class="columns">
-                <div class="column">
-                    <input class="input my-1" type="number" placeholder="duration" name="duration">
-                </div>
-                <div class="column is-one-third">
-                    <input class="input my-1" type="text" placeholder="select a duration dimension" name="duration-dimension" list="time-dimensions">
-                </div>
+        <div class="columns">
+            <div class="column">
+                <h2 class="subtitle">By specific gamertag</h2>
+                <form action="{{url_for('dashboard.run_ban')}}" method="post">
+                    <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
+                    <div class="columns">
+                        <div class="column">
+                            <input class="input my-1" type="number" placeholder="duration" name="duration">
+                        </div>
+                        <div class="column">
+                            <input class="input my-1" type="text" placeholder="minutes/hours/days/weeks/months" name="duration-dimension" list="time-dimensions">
+                        </div>
+                    </div>
+                    <datalist id="time-dimensions">
+                        <option value="minutes">
+                        <option value="hours">
+                        <option value="days">
+                        <option value="weeks">
+                        <option value="months">
+                    </datalist>
+                    <label class="checkbox my-2">
+                      <input type="checkbox" name="remember">
+                        Add player name to list of known people
+                    </label><br>
+                    <input class="button is-danger my-1 is-fullwidth" value="Ban" type="submit">
+                </form>
             </div>
-            <datalist id="time-dimensions">
-                <option value="minutes">
-                <option value="hours">
-                <option value="days">
-                <option value="weeks">
-                <option value="months">
-            </datalist>
-            <label class="checkbox my-2">
-              <input type="checkbox" name="remember">
-                Add player name to list of known people
-            </label><br>
-            <input class="button is-danger my-1" value="Ban" type="submit">
-        </form><hr>
 
-        <h2>Paste in a name from the list of known players</h2>
-        {% for player in list_of_players %}
-                <button class="button is-fullwidth my-1" onclick="document.getElementById('gamertag').value = '{{player}}';">{{player}}</button>
-            </form>
-        {% endfor %}
-        <a href="{{url_for('dashboard.etc')}}">
-            <button class="button is-success">
-                Edit list
-            </button>
-        </a>
+            <div class="column">
+                <h2>Paste in a name from the list of known players</h2>
+                {% for player in list_of_players %}
+                    <button class="button is-fullwidth my-1" onclick="document.getElementById('gamertag').value = '{{player}}';">{{player}}</button>
+                {% endfor %}
+                <a href="{{url_for('dashboard.etc')}}">
+                    <button class="button is-success">
+                        Edit list
+                    </button>
+                </a>
+            </div>
+        </div>
     </div>
 </section>
 

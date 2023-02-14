@@ -21,3 +21,6 @@ htmlcov/
 .coverage
 .coverage.*
 *,cover
+
+austeritas_config.json
+austeritas_data.json

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session, g, request, flash
 import base64, bcrypt, hashlib
 from ..helpers import load_json
+from ..constants import DUMMY_HASH
 from json import dumps
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
@@ -46,6 +47,7 @@ def run_login():
                 flash("Incorrect username or password.", "danger")
                 return redirect(url_for("auth.login"))
     else:
+        check_password(data["password"], DUMMY_HASH) # just there to mitigate enumeration attacks
         flash("Incorrect username or password.", "danger")
         return redirect(url_for("auth.login"))
 
