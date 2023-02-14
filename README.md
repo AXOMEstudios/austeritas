@@ -1,3 +1,5 @@
+![Austeritas Logo](https://github.com/AXOMEstudios/austeritas/raw/master/Austeritas%20with%20Text.png)
+
 # Austeritas
 Austeritas is an amazingly easy-to-use server moderation system for Bedrock Dedicated Servers (BDS) which allows you to remotely keep track of your moderation tasks by simply using the Austeritas online interface.
 
