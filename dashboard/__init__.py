@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from ..helpers import login_required, load_json, write_json, validate_player_name
-from ..constants import DATA_FILENAME
-from ..internals.api import execute_kick, execute_ban, send_chat_warning
+from ..constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
+from ..internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban
 import time
+from datetime import datetime
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
@@ -64,7 +65,11 @@ def kick():
 @login_required
 def ban():
     known = load_json(DATA_FILENAME)["known_players"]
-    return render_template("dashboard/ban.html", list_of_players = known)
+    banned_players = load_json(DATA_FILENAME)["bans"]
+    banned_players = {
+        player: datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') for player, expiration in banned_players.items()
+    }
+    return render_template("dashboard/ban.html", list_of_players = known, banned_players = banned_players, clock_rate = round(CLOCK_INTERVAL / 60))
 
 @dashboard.route("/warnings")
 @login_required
@@ -76,7 +81,7 @@ def warnings():
 @login_required
 def etc():
     known = load_json(DATA_FILENAME)["known_players"]
-    return render_template("dashboard/etc.html", list_of_players = known)
+    return render_template("dashboard/etc.html", list_of_players = known, clock_rate = round(CLOCK_INTERVAL / 60))
 
 @dashboard.route("/kick/run", methods = ["POST"])
 @login_required
@@ -114,7 +119,7 @@ def run_ban():
     if not data["player"]:
         flash("You must provide a player name.", "danger")
         return redirect(
-            url_for("dashboard.kick")
+            url_for("dashboard.ban")
         )
 
     if "remember" in data.keys() and data["remember"] == "on":
@@ -131,6 +136,10 @@ def run_ban():
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
         flash("Choose a correct dimension.", "danger")
+        return redirect(url_for("dashboard.ban"))
+    
+    if not data["duration"]:
+        flash("Enter a time.", "danger")
         return redirect(url_for("dashboard.ban"))
 
     duration_in_seconds = int(data["duration"]) * DIMENSIONS_TRANSLATED[
@@ -191,4 +200,47 @@ def remove_warn_route():
 
     return redirect(
         url_for("dashboard.warnings")
+    )
+
+@dashboard.route("/etc/autoban", methods = ["POST"])
+@login_required
+def auto_ban():
+    data = request.form
+
+    if not (data["max_warnings"] and data["duration"]):
+        flash("Fill out all the fields!", "danger")
+        return redirect(
+            url_for("dashboard.etc")
+        )
+
+    settings = {
+        "do_autoban": "on" if "do_autoban" in data.keys() else "off",
+        "reset_warns": "on" if "reset_warns" in data.keys() else "off",
+        "max_warnings": int(data["max_warnings"]),
+        "duration_dimension": data["duration_dimension"]
+    }
+
+    _tmp = load_json(CONFIG_FILENAME)
+    _tmp["autoban_settings"] = settings
+    write_json(_tmp, CONFIG_FILENAME)
+
+    return redirect(
+        url_for("dashboard.etc")
+    )
+
+@dashboard.route("/ban/unban", methods = ["POST"])
+@login_required
+def run_unban():
+    data = request.form
+    execute_unban(data["player"])
+
+    _tmp = load_json(DATA_FILENAME)
+    expiration = _tmp["bans"][data["player"]]
+    del _tmp["bans"][data["player"]]
+    write_json(_tmp, DATA_FILENAME)
+    
+    flash("%s has been unbanned. Otherwise, the ban would've ended on %s." % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
+    
+    return redirect(
+        url_for("dashboard.ban")
     )

@@ -15,22 +15,7 @@
                 <h2 class="subtitle">By specific gamertag</h2>
                 <form action="{{url_for('dashboard.run_ban')}}" method="post">
                     <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
-                    <div class="columns">
-                        <div class="column">
-                            <input class="input my-1" type="number" placeholder="duration" name="duration">
-                        </div>
-                        <div class="column">
-                            <input class="input my-1" type="text" placeholder="minutes/hours/days/weeks/months" name="duration-dimension" list="time-dimensions">
-                        </div>
-                    </div>
-                    <datalist id="time-dimensions">
-                        <option value="minutes">
-                        <option value="hours">
-                        <option value="days">
-                        <option value="weeks">
-                        <option value="months">
-                        <option value="permanent">
-                    </datalist>
+                    {% include "dashboard/components/ban_duration_picker.html" %}
                     <label class="checkbox my-2">
                       <input type="checkbox" name="remember">
                         Add player name to list of known people
@@ -51,6 +36,46 @@
                 </a>
             </div>
         </div>
+        <hr>
+        <h2 class="subtitle">
+            Banned players
+        </h2>
+        <p>
+            Below, all players having a non-permanent ban are listed.
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Player
+                    </th>
+                    <th>
+                        ban expires on
+                    </th>
+                    <th>
+                        unban?
+                    </th>
+                </tr>
+            </thead>
+            {% for player, expiration in banned_players.items() %}
+                <tr>
+                    <td>
+                        {{player}}
+                    </td>
+                    <td>
+                        {{expiration}}
+                    </td>
+                    <td>
+                        <form action="{{url_for('dashboard.run_unban')}}" method="post">
+                            <input type="hidden" name="player" value="{{player}}">
+                            <button class="button is-success">
+                                Unban
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 </section>
 

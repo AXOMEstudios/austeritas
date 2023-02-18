@@ -13,12 +13,32 @@
 
         <div class="columns">
             <div class="column">
+                <h2>Automatic Banning</h2>
+                <p>
+                    <strong>Automatically bans a player when the player exceeds a specific warning count.</strong>
+                </p>
+                <form action="{{url_for('dashboard.auto_ban')}}" method="post">
+                    <input type="number" name="max_warnings" value="{{max_warnings}}" placeholder="warnings to get banned" class="input">
+                    <label class="checkbox my-1">
+                        <input type="checkbox" name="do_autoban">
+                        Ban players exceeding this limit
+                    </label><br>
+                    <label class="checkbox my-1">
+                        <input type="checkbox" name="reset_warns">
+                        Reset warnings upon ban happened
+                    </label><br>
+                    <label>
+                        <strong>Once limit reached, ban for...</strong>
+                    </label>
+                    {% include "dashboard/components/ban_duration_picker.html" %}
+                    <button class="button is-success">Save settings</button>
+                </form>
             </div>
             <div class="column">
                 <h2>Edit list of known players</h2>
                 {% for player in list_of_players %}
                 <div class="box p-4 my-2">
-                    <div class="columns">
+                    <div class="columns is-mobile">
                         <div class="column p-5">
                             {{player}}
                         </div>

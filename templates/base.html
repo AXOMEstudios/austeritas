@@ -14,8 +14,6 @@
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
 
-      <script src="/static/assets/script.js"></script>
-
       {% block head %}
       {% endblock %}
 
@@ -25,6 +23,10 @@
       </title>
   </head>
   <body>
+    <div class="main">
+        <div class="bubble" id="bubble"></div>
+        <div class="container2"></div>
+    </div>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item" href="/">
@@ -78,7 +80,7 @@
 
     {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-        <div class="flashes p-3">
+        <div class="flashes p-3" style="position: fixed; bottom: 0; left: 0; z-index: 999;" id="flashes">
           {% for category, message in messages %}
             <article class="message is-{{ category }}">
               <div class="message-body">
@@ -92,6 +94,8 @@
 
     {% block content %}
     {% endblock content %}
+
+    <script src="/static/assets/script.js"></script>
 
   </body>
 </html>

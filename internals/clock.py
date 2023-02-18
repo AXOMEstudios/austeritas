@@ -11,6 +11,8 @@ def clock_tick():
         if list(_tmp["bans"].keys()):
             to_delete = []
             for player, timestamp in _tmp["bans"].items():
+                if timestamp == "permanent":
+                    continue
                 if time.time() > timestamp:
                     execute_unban(player)
                     to_delete.append(player)
