@@ -1,0 +1,29 @@
+<div class="columns">
+    <div class="column">
+        <input class="input my-1" type="number" placeholder="duration (enter any number)" name="duration" list="possible-durations"><br>
+        <label>(could be up to {{clock_rate}} minutes longer due to internal Austeritas performance optimizations)</label>
+    </div>
+    <div class="column">
+        <input class="input my-1" type="text" placeholder="minutes/hours/days/weeks/months" name="duration-dimension" list="time-dimensions">
+    </div>
+</div>
+<datalist id="possible-durations">
+    <option value="1">
+    <option value="2">
+    <option value="5">
+    <option value="7">
+    <option value="15">
+    <option value="20">
+    <option value="25">
+    <option value="28">
+    <option value="30">
+    <option value="365">
+</datalist>
+<datalist id="time-dimensions">
+    <option value="minutes">
+    <option value="hours">
+    <option value="days">
+    <option value="weeks">
+    <option value="months">
+    <option value="permanent">
+</datalist>
