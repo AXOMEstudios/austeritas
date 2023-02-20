@@ -18,13 +18,13 @@
                     <strong>Automatically bans a player when the player exceeds a specific warning count.</strong>
                 </p>
                 <form action="{{url_for('dashboard.auto_ban')}}" method="post">
-                    <input type="number" name="max_warnings" value="{{max_warnings}}" placeholder="warnings to get banned" class="input">
+                    <input type="number" name="max_warnings" placeholder="warnings to get banned" class="input" value="{{abs['max_warnings']}}">
                     <label class="checkbox my-1">
-                        <input type="checkbox" name="do_autoban">
+                        <input type="checkbox" name="do_autoban" value="{{abs['do_autoban']}}" {% if abs['do_autoban'] == "on" %}checked{% endif %}>
                         Ban players exceeding this limit
                     </label><br>
                     <label class="checkbox my-1">
-                        <input type="checkbox" name="reset_warns">
+                        <input type="checkbox" name="reset_warns" value="{{abs['reset_warns']}}" {% if abs['reset_warns'] == "on" %}checked{% endif %}>
                         Reset warnings upon ban happened
                     </label><br>
                     <label>

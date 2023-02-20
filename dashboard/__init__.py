@@ -7,6 +7,15 @@ from datetime import datetime
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
+DIMENSIONS_TRANSLATED = {
+    "minutes": 60,
+    "hours": 60 * 60,
+    "days": 60 * 60 * 24,
+    "weeks": 60 * 60 * 24 * 7,
+    "months": 60 * 60 * 24 * 31,
+    "permanent": -1
+}
+
 def add_to_list_of_known_players(player):
     _tmp = load_json(DATA_FILENAME)
     if not player in _tmp["known_players"]:
@@ -27,14 +36,35 @@ def remove_from_list_of_known_players(player):
 
 def add_warning_to_player(player):
     _tmp = load_json(DATA_FILENAME)
+    autoban_settings = load_json(CONFIG_FILENAME)["autoban_settings"]
+
     if not player in _tmp["warnings"]:
         _tmp["warnings"][player] = 1
     else:
         _tmp["warnings"][player] += 1
     send_chat_warning(player, _tmp["warnings"][player])
+    flash(f"Gave one warning to {player}", "success")
+    
+    if autoban_settings["do_autoban"] == "on":
+        if _tmp["warnings"][player] >= autoban_settings["max_warnings"]:
+            duration_in_seconds = int(autoban_settings["duration"]) * DIMENSIONS_TRANSLATED[
+                autoban_settings["duration-dimension"]
+            ]
+            ban_end_timestamp = round(time.time()) + duration_in_seconds
+    
+            execute_ban(player, (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
+            flash("Automatic banning: %s banned (%s%s) for exceeding warning limit of %s warnings." % (
+                player,
+                (autoban_settings["duration"] if not autoban_settings["duration-dimension"] == "permanent" else ""),
+                (" " if not autoban_settings["duration-dimension"] == "permanent" else "") + autoban_settings["duration-dimension"],
+                autoban_settings["max_warnings"]
+            ), "warning")
+
+            if autoban_settings["reset_warns"] == "on":
+                del _tmp["warnings"][player]
+                flash("Automatic banning: Removed all warnings from %s due to policy." % player, "warning")
 
     write_json(_tmp, DATA_FILENAME)
-    flash(f"Gave one warning to {player}", "success")
 
 def remove_warning_from_player(player):
     _tmp = load_json(DATA_FILENAME)
@@ -81,7 +111,8 @@ def warnings():
 @login_required
 def etc():
     known = load_json(DATA_FILENAME)["known_players"]
-    return render_template("dashboard/etc.html", list_of_players = known, clock_rate = round(CLOCK_INTERVAL / 60))
+    autoban_settings = load_json(CONFIG_FILENAME)["autoban_settings"]
+    return render_template("dashboard/etc.html", list_of_players = known, clock_rate = round(CLOCK_INTERVAL / 60), abs = autoban_settings)
 
 @dashboard.route("/kick/run", methods = ["POST"])
 @login_required
@@ -124,15 +155,6 @@ def run_ban():
 
     if "remember" in data.keys() and data["remember"] == "on":
         add_to_list_of_known_players(data["player"])
-
-    DIMENSIONS_TRANSLATED = {
-        "minutes": 60,
-        "hours": 60 * 60,
-        "days": 60 * 60 * 24,
-        "weeks": 60 * 60 * 24 * 7,
-        "months": 60 * 60 * 24 * 31,
-        "permanent": -1
-    }
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
         flash("Choose a correct dimension.", "danger")
@@ -217,12 +239,21 @@ def auto_ban():
         "do_autoban": "on" if "do_autoban" in data.keys() else "off",
         "reset_warns": "on" if "reset_warns" in data.keys() else "off",
         "max_warnings": int(data["max_warnings"]),
-        "duration_dimension": data["duration_dimension"]
+        "duration-dimension": data["duration-dimension"],
+        "duration": int(data["duration"])
     }
+
+    if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
+        flash("Please enter a valid duration dimension.", "danger")
+        return redirect(
+            url_for("dashboard.etc")
+        )
 
     _tmp = load_json(CONFIG_FILENAME)
     _tmp["autoban_settings"] = settings
     write_json(_tmp, CONFIG_FILENAME)
+
+    flash("Automatic banning: Settings saved.", "success")
 
     return redirect(
         url_for("dashboard.etc")

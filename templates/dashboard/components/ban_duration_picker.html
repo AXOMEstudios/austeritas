@@ -1,10 +1,10 @@
 <div class="columns">
     <div class="column">
-        <input class="input my-1" type="number" placeholder="duration (enter any number)" name="duration" list="possible-durations"><br>
+        <input class="input my-1" type="number" placeholder="duration (enter any number)" name="duration" list="possible-durations" {% if abs %}value="{{abs['duration']}}"{% endif %}><br>
         <label>(could be up to {{clock_rate}} minutes longer due to internal Austeritas performance optimizations)</label>
     </div>
     <div class="column">
-        <input class="input my-1" type="text" placeholder="minutes/hours/days/weeks/months" name="duration-dimension" list="time-dimensions">
+        <input class="input my-1" type="text" placeholder="minutes/hours/days/weeks/months" name="duration-dimension" list="time-dimensions" {% if abs %}value="{{abs['duration-dimension']}}"{% endif %}>
     </div>
 </div>
 <datalist id="possible-durations">

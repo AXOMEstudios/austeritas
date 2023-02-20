@@ -1,7 +1,1 @@
-{
-    "users": [
-        {"name": "default", "password": "$2b$12$E98.oMcmtNHOc2P/w7i8Gu1sMP8xZULBzOVWjwXXLexFKZZTnVoke"},
-        {"name": "Dr. Dr. Rousseau Ramirez", "password": "$2b$12$nuC2FcHjDFL00nnoZ4oALOm/xnukp3B/Os9XljdO9matKcIoVY3ya"} 
-    ],
-    "autoban_settings": {}
-}
+{"users": [{"name": "default", "password": "$2b$12$E98.oMcmtNHOc2P/w7i8Gu1sMP8xZULBzOVWjwXXLexFKZZTnVoke"}, {"name": "Dr. Dr. Rousseau Ramirez", "password": "$2b$12$nuC2FcHjDFL00nnoZ4oALOm/xnukp3B/Os9XljdO9matKcIoVY3ya"}], "autoban_settings": {"do_autoban": "on", "reset_warns": "on", "max_warnings": 3, "duration-dimension": "hours", "duration": 2}}

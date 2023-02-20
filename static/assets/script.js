@@ -16,4 +16,4 @@ document.body.onpointermove = (e) => {
 flashes = document.getElementById("flashes");
 setTimeout(() => {
     flashes.style.display = "none";
-}, 3400);
+}, 7500);
