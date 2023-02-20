@@ -52,7 +52,7 @@ main {
 }
 
 .flashes {
-    animation: fade-away 0.5s 3s;
+    animation: fade-away 0.5s 7s;
 }
 
 .message {
