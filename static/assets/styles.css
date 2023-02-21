@@ -86,3 +86,14 @@ main {
         transform: rotate(0deg);
     }
 }
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(2rem);
+}
+
+.section {
+    padding-top: 8rem;
+}
