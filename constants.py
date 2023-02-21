@@ -6,3 +6,4 @@ DUMMY_HASH                              = "$2b$12$s3YEAcxEsggkbib5uAvfiueIdBho7H
 SERVER_NAME                             = "UwU-Server"
 CLOCK_INTERVAL                          = 10 * 60
 SCREEN_PROCESS_NAME                     = "bedrock-server"
+LANGUAGE                                = "en"

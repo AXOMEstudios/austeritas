@@ -4,6 +4,7 @@ from ..constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
 from ..internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban
 import time
 from datetime import datetime
+from flask_babel import gettext
 
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
 
@@ -44,7 +45,8 @@ def add_warning_to_player(player):
         _tmp["warnings"][player] += 1
     send_chat_warning(player, _tmp["warnings"][player])
     flash(f"Gave one warning to {player}", "success")
-    
+    write_json(_tmp, DATA_FILENAME)
+
     if autoban_settings["do_autoban"] == "on":
         if _tmp["warnings"][player] >= autoban_settings["max_warnings"]:
             duration_in_seconds = int(autoban_settings["duration"]) * DIMENSIONS_TRANSLATED[
@@ -61,10 +63,11 @@ def add_warning_to_player(player):
             ), "warning")
 
             if autoban_settings["reset_warns"] == "on":
+                _tmp = load_json(DATA_FILENAME)
                 del _tmp["warnings"][player]
+                write_json(_tmp, DATA_FILENAME)
                 flash("Automatic banning: Removed all warnings from %s due to policy." % player, "warning")
 
-    write_json(_tmp, DATA_FILENAME)
 
 def remove_warning_from_player(player):
     _tmp = load_json(DATA_FILENAME)
@@ -104,8 +107,10 @@ def ban():
 @dashboard.route("/warnings")
 @login_required
 def warnings():
-    warnings = load_json(DATA_FILENAME)["warnings"]
-    return render_template("dashboard/warnings.html", warnings = warnings)
+    _tmp = load_json(DATA_FILENAME)
+    warnings = _tmp["warnings"]
+    known = _tmp["known_players"]
+    return render_template("dashboard/warnings.html", warnings = warnings, list_of_players = known)
 
 @dashboard.route("/etc")
 @login_required
