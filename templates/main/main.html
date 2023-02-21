@@ -2,23 +2,16 @@
 {% block title %}
     Austeritas
 {% endblock %}
-
 {% block content %}
-
-<section class="section">
-    <div class="container content">
-        <h1 class="title is-1">
-            Austeritas
-        </h1>
-        <p>
-            This server is running the Austeritas remote moderation system for Bedrock Dedicated Servers (BDS).
-        </p>
-        <a href="{{url_for('auth.login')}}">
-            <button class="button">
-                Log in to continue
-            </button>
-        </a>
-    </div>
-</section>
-
+<h1 class="title is-1">
+    Austeritas
+</h1>
+<p>
+    This server is running the Austeritas remote moderation system for Bedrock Dedicated Servers (BDS).
+</p>
+<a href="{{url_for('auth.login')}}">
+    <button class="button">
+        Log in to continue
+    </button>
+</a>
 {% endblock content %}

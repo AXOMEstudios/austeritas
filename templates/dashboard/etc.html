@@ -2,70 +2,63 @@
 {% block title %}
     Austeritas - miscellaneous
 {% endblock %}
-
 {% block content %}
+<h1 class="title is-1">
+    Miscellaneous
+</h1><hr>
 
-<section class="section">
-    <div class="container content">
-        <h1 class="title is-1">
-            Miscellaneous
-        </h1><hr>
-
-        <div class="columns">
-            <div class="column">
-                <h2>Automatic Banning</h2>
-                <p>
-                    <strong>Automatically bans a player when the player exceeds a specific warning count.</strong>
-                </p>
-                <form action="{{url_for('dashboard.auto_ban')}}" method="post">
-                    <input type="number" name="max_warnings" placeholder="warnings to get banned" class="input" value="{{abs['max_warnings']}}">
-                    <label class="checkbox my-1">
-                        <input type="checkbox" name="do_autoban" value="{{abs['do_autoban']}}" {% if abs['do_autoban'] == "on" %}checked{% endif %}>
-                        Ban players exceeding this limit
-                    </label><br>
-                    <label class="checkbox my-1">
-                        <input type="checkbox" name="reset_warns" value="{{abs['reset_warns']}}" {% if abs['reset_warns'] == "on" %}checked{% endif %}>
-                        Reset warnings upon ban happened
-                    </label><br>
-                    <label>
-                        <strong>Once limit reached, ban for...</strong>
-                    </label>
-                    {% include "dashboard/components/ban_duration_picker.html" %}
-                    <button class="button is-success">Save settings</button>
-                </form>
-            </div>
-            <div class="column">
-                <h2>Edit list of known players</h2>
-                {% for player in list_of_players %}
-                <div class="box p-4 my-2">
-                    <div class="columns is-mobile">
-                        <div class="column p-5">
-                            {{player}}
-                        </div>
-                        <div class="column is-one-fifth py-4">
-                            <form action="{{url_for('dashboard.remove_from_list')}}" method="post">
-                                <input type="hidden" name="player" value="{{player}}">
-                                <button class="button is-danger">
-                                    <span class="material-symbols-outlined">
-                                        delete
-                                    </span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
+<div class="columns">
+    <div class="column">
+        <h2>Automatic Banning</h2>
+        <p>
+            <strong>Automatically bans a player when the player exceeds a specific warning count.</strong>
+        </p>
+        <form action="{{url_for('dashboard.auto_ban')}}" method="post">
+            <input type="number" name="max_warnings" placeholder="warnings to get banned" class="input" value="{{abs['max_warnings']}}">
+            <label class="checkbox my-1">
+                <input type="checkbox" name="do_autoban" value="{{abs['do_autoban']}}" {% if abs['do_autoban'] == "on" %}checked{% endif %}>
+                Ban players exceeding this limit
+            </label><br>
+            <label class="checkbox my-1">
+                <input type="checkbox" name="reset_warns" value="{{abs['reset_warns']}}" {% if abs['reset_warns'] == "on" %}checked{% endif %}>
+                Reset warnings upon ban happened
+            </label><br>
+            <label>
+                <strong>Once limit reached, ban for...</strong>
+            </label>
+            {% include "dashboard/components/ban_duration_picker.html" %}
+            <button class="button is-success">Save settings</button>
+        </form>
+    </div>
+    <div class="column">
+        <h2>Edit list of known players</h2>
+        {% for player in list_of_players %}
+        <div class="box p-4 my-2">
+            <div class="columns is-mobile">
+                <div class="column p-5">
+                    {{player}}
                 </div>
-                {% endfor %}
-                <form action="{{url_for('dashboard.add_to_list')}}" method="post">
-                    <input class="input my-1" type="text" placeholder="gamertag" name="player">
-                    <label class="checkbox my-2">
-                        <input type="checkbox" name="warn">
-                        Add warning to player
-                    </label><br>
-                    <input class="button is-success my-1 is-fullwidth" value="Add player to list" type="submit">
-                </form>
+                <div class="column is-one-fifth py-4">
+                    <form action="{{url_for('dashboard.remove_from_list')}}" method="post">
+                        <input type="hidden" name="player" value="{{player}}">
+                        <button class="button is-danger">
+                            <span class="material-symbols-outlined">
+                                delete
+                            </span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
+        {% endfor %}
+        <form action="{{url_for('dashboard.add_to_list')}}" method="post">
+            <input class="input my-1" type="text" placeholder="gamertag" name="player">
+            <label class="checkbox my-2">
+                <input type="checkbox" name="warn">
+                Add warning to player
+            </label><br>
+            <input class="button is-success my-1 is-fullwidth" value="Add player to list" type="submit">
+        </form>
     </div>
-</section>
-
+</div>
 {% endblock content %}

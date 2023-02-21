@@ -2,44 +2,27 @@
 {% block title %}
     Austeritas - kick
 {% endblock %}
-
 {% block content %}
-
-<section class="section">
-    <div class="container content">
-        <h1 class="title is-1">
-            Kick a player
-        </h1><hr>
-        <div class="columns">
-            <div class="column">
-                <h2 class="subtitle">By specific gamertag</h2>
-                <form action="{{url_for('dashboard.run_kick')}}" method="post">
-                    <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
-                    <label class="checkbox my-2">
-                    <input type="checkbox" name="remember">
-                        Add player name to list of known people
-                    </label><br>
-                    <label class="checkbox my-2">
-                        <input type="checkbox" name="warn">
-                        Add warning to player
-                    </label><br>
-                    <input class="button is-danger my-1 is-fullwidth" value="Kick" type="submit">
-                </form>
-            </div>
-            
-            <div class="column">
-                <h2>Paste in a name from the list of known players</h2>
-                {% for player in list_of_players %}
-                <button class="button is-fullwidth my-1" onclick="document.getElementById('gamertag').value = '{{player}}';">{{player}}</button>
-                {% endfor %}
-                <a href="{{url_for('dashboard.etc')}}">
-                    <button class="button is-success">
-                        Edit list
-                    </button>
-                </a>
-            </div>
-        </div>
+<h1 class="title is-1">
+    Kick a player
+</h1><hr>
+<div class="columns">
+    <div class="column">
+        <h2 class="subtitle">By specific gamertag</h2>
+        <form action="{{url_for('dashboard.run_kick')}}" method="post">
+            <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
+            <label class="checkbox my-2">
+            <input type="checkbox" name="remember">
+                Add player name to list of known people
+            </label><br>
+            <label class="checkbox my-2">
+                <input type="checkbox" name="warn">
+                Add warning to player
+            </label><br>
+            <input class="button is-danger my-1 is-fullwidth" value="Kick" type="submit">
+        </form>
     </div>
-</section>
-
+    
+    {% include "/dashboard/components/list.html" %}
+</div>
 {% endblock content %}

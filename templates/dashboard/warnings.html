@@ -2,46 +2,44 @@
 {% block title %}
     Austeritas - warnings
 {% endblock %}
-
 {% block content %}
+<h1 class="title is-1">
+    Warned players
+</h1>
 
-<section class="section">
-    <div class="container content">
-        <h1 class="title is-1">
-            Warned players
-        </h1>
-        
+<div class="columns">
+    <div class="column">
         <table>
             {% for player, warns in warnings.items() %}
-                <tr>
-                    <td width="80%">{{player}}</td>
-                    <td>{{warns}}</td>
-                    <td>
-                        <div class="columns">
-                            <div class="column">
-                                <form action="{{url_for('dashboard.add_warn_route')}}" method="post">
-                                    <input type="hidden" name="player" value="{{player}}">
-                                    <button class="button is-danger">+ 1</button>
-                                </form>
-                            </div>
-                            <div class="column">
-                                <form action="{{url_for('dashboard.remove_warn_route')}}" method="post">
-                                    <input type="hidden" name="player" value="{{player}}">
-                                    <button class="button is-danger">-1</button>
-                                </form>
-                            </div>
+            <tr>
+                <td width="80%">{{player}}</td>
+                <td>{{warns}}</td>
+                <td>
+                    <div class="columns">
+                        <div class="column">
+                            <form action="{{url_for('dashboard.add_warn_route')}}" method="post">
+                                <input type="hidden" name="player" value="{{player}}">
+                                <button class="button is-danger">+ 1</button>
+                            </form>
                         </div>
-                    </td>
-                </tr>
+                        <div class="column">
+                            <form action="{{url_for('dashboard.remove_warn_route')}}" method="post">
+                                <input type="hidden" name="player" value="{{player}}">
+                                <button class="button is-danger">-1</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            </tr>
             {% endfor %}
         </table>
         <hr>
         <h2 class="subtitle"></h2>
         <form action="{{url_for('dashboard.add_warn_route')}}" method="post">
-            <input type="text" class="input my-2" placeholder="gamertag of player you'd like to warn" name="player">
+            <input type="text" class="input my-2" placeholder="gamertag of player you'd like to warn" name="player" id="gamertag">
             <button class="button is-danger">Add warning to player</button>
         </form>
     </div>
-</section>
-
+    {% include "/dashboard/components/list.html" %}
+</div>
 {% endblock content %}

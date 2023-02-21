@@ -1,0 +1,11 @@
+<div class="column">
+    <h2>Paste in a name from the list of known players</h2>
+    {% for player in list_of_players %}
+        <button class="button is-fullwidth my-1" onclick="document.getElementById('gamertag').value = '{{player}}';">{{player}}</button>
+    {% endfor %}
+    <a href="{{url_for('dashboard.etc')}}">
+        <button class="button is-success">
+            Edit list
+        </button>
+    </a>
+</div>
