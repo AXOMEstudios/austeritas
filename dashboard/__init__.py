@@ -22,18 +22,18 @@ def add_to_list_of_known_players(player):
     if not player in _tmp["known_players"]:
         _tmp["known_players"].append(player)
         write_json(_tmp, DATA_FILENAME)
-        flash("Added player to list of known players.", "success")
+        flash(gettext("Added player to list of known players."), "success")
     else:
-        flash("Player already on list.", "danger")
+        flash(gettext("Player already on list."), "danger")
 
 def remove_from_list_of_known_players(player):
     _tmp = load_json(DATA_FILENAME)
     if player in _tmp["known_players"]:
         _tmp["known_players"].remove(player)
         write_json(_tmp, DATA_FILENAME)
-        flash("Removed player from list of known players.", "success")
+        flash(gettext("Removed player from list of known players."), "success")
     else:
-        flash("Player not found on list.", "danger")
+        flash(gettext("Player not found on list."), "danger")
 
 def add_warning_to_player(player):
     _tmp = load_json(DATA_FILENAME)
@@ -44,7 +44,7 @@ def add_warning_to_player(player):
     else:
         _tmp["warnings"][player] += 1
     send_chat_warning(player, _tmp["warnings"][player])
-    flash(f"Gave one warning to {player}", "success")
+    flash(gettext("Gave one warning to %s") % player, "success")
     write_json(_tmp, DATA_FILENAME)
 
     if autoban_settings["do_autoban"] == "on":
@@ -55,7 +55,7 @@ def add_warning_to_player(player):
             ban_end_timestamp = round(time.time()) + duration_in_seconds
     
             execute_ban(player, (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
-            flash("Automatic banning: %s banned (%s%s) for exceeding warning limit of %s warnings." % (
+            flash(gettext("Automatic banning: %s banned (%s%s) for exceeding warning limit of %s warnings.") % (
                 player,
                 (autoban_settings["duration"] if not autoban_settings["duration-dimension"] == "permanent" else ""),
                 (" " if not autoban_settings["duration-dimension"] == "permanent" else "") + autoban_settings["duration-dimension"],
@@ -66,13 +66,13 @@ def add_warning_to_player(player):
                 _tmp = load_json(DATA_FILENAME)
                 del _tmp["warnings"][player]
                 write_json(_tmp, DATA_FILENAME)
-                flash("Automatic banning: Removed all warnings from %s due to policy." % player, "warning")
+                flash(gettext("Automatic banning: Removed all warnings from %s due to policy.") % player, "warning")
 
 
 def remove_warning_from_player(player):
     _tmp = load_json(DATA_FILENAME)
     if not player in _tmp["warnings"]:
-        flash("The player has no warnings.", "danger")
+        flash(gettext("The player has no warnings."), "danger")
         return
     else:
         if _tmp["warnings"][player] > 1:
@@ -81,7 +81,7 @@ def remove_warning_from_player(player):
             del _tmp["warnings"][player]
 
     write_json(_tmp, DATA_FILENAME)
-    flash(f"Removed one warning from {player}", "success")
+    flash(gettext("Removed one warning from %s.") % player, "success")
 
 @dashboard.route("/")
 @login_required
@@ -124,13 +124,13 @@ def etc():
 def run_kick():
     data = request.form
     if not data["player"]:
-        flash("You must provide a player name.", "danger")
+        flash(gettext("You must provide a player name."), "danger")
         return redirect(
             url_for("dashboard.kick")
         )
 
     if not validate_player_name(data["player"]):
-        flash("Invalid input.", "danger")
+        flash(gettext("Invalid input.", "danger"))
         return redirect(
             url_for("dashboard.kick")
         )
@@ -142,7 +142,7 @@ def run_kick():
         add_warning_to_player(data["player"])
 
     execute_kick(data["player"])
-    flash("Sent kick signal to server.", "success")
+    flash(gettext("Sent kick signal to server."), "success")
 
     return redirect(
         url_for("dashboard.kick")
@@ -153,7 +153,7 @@ def run_kick():
 def run_ban():
     data = request.form
     if not data["player"]:
-        flash("You must provide a player name.", "danger")
+        flash(gettext("You must provide a player name."), "danger")
         return redirect(
             url_for("dashboard.ban")
         )
@@ -162,11 +162,11 @@ def run_ban():
         add_to_list_of_known_players(data["player"])
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
-        flash("Choose a correct dimension.", "danger")
+        flash(gettext("Choose a correct dimension."), "danger")
         return redirect(url_for("dashboard.ban"))
     
     if not data["duration"]:
-        flash("Enter a time.", "danger")
+        flash(gettext("Enter a time."), "danger")
         return redirect(url_for("dashboard.ban"))
 
     duration_in_seconds = int(data["duration"]) * DIMENSIONS_TRANSLATED[
@@ -175,8 +175,8 @@ def run_ban():
     ban_end_timestamp = round(time.time()) + duration_in_seconds
     
     execute_ban(data["player"], (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
-    flash("Player banned for %s %s." % (data["duration"], data["duration-dimension"])
-          if data["duration-dimension"] != "permanent" else "Player banned permanently.", "success")
+    flash(gettext("Player banned for %s %s.") % (data["duration"], data["duration-dimension"])
+          if data["duration-dimension"] != "permanent" else gettext("Player banned permanently."), "success")
     
     return redirect(
         url_for("dashboard.ban")
@@ -235,7 +235,7 @@ def auto_ban():
     data = request.form
 
     if not (data["max_warnings"] and data["duration"]):
-        flash("Fill out all the fields!", "danger")
+        flash(gettext("Fill out all the fields!"), "danger")
         return redirect(
             url_for("dashboard.etc")
         )
@@ -249,7 +249,7 @@ def auto_ban():
     }
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
-        flash("Please enter a valid duration dimension.", "danger")
+        flash(gettext("Please enter a valid duration dimension."), "danger")
         return redirect(
             url_for("dashboard.etc")
         )
@@ -258,7 +258,7 @@ def auto_ban():
     _tmp["autoban_settings"] = settings
     write_json(_tmp, CONFIG_FILENAME)
 
-    flash("Automatic banning: Settings saved.", "success")
+    flash(gettext("Automatic banning: Settings saved."), "success")
 
     return redirect(
         url_for("dashboard.etc")
@@ -275,7 +275,7 @@ def run_unban():
     del _tmp["bans"][data["player"]]
     write_json(_tmp, DATA_FILENAME)
     
-    flash("%s has been unbanned. Otherwise, the ban would've ended on %s." % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
+    flash(gettext("%s has been unbanned. Otherwise, the ban would've ended on %s.") % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
     
     return redirect(
         url_for("dashboard.ban")

@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, redirect, url_for, session, g, request, flash
 import base64, bcrypt, hashlib
 from ..helpers import load_json
-from ..constants import DUMMY_HASH
+from ..constants import DUMMY_HASH, ALLOW_NEW_USERS
 from json import dumps
+from flask_babel import gettext
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
@@ -44,22 +45,28 @@ def run_login():
                 g.user = user["name"]
                 return redirect(url_for("dashboard.home"))
             else:
-                flash("Incorrect username or password.", "danger")
+                flash(gettext("Incorrect username or password."), "danger")
                 return redirect(url_for("auth.login"))
     else:
         check_password(data["password"], DUMMY_HASH) # just there to mitigate enumeration attacks
-        flash("Incorrect username or password.", "danger")
+        flash(gettext("Incorrect username or password."), "danger")
         return redirect(url_for("auth.login"))
 
 @auth.route("/new", methods = ["POST"])
 def new_user():
     data = request.form
 
+    if not ALLOW_NEW_USERS:
+        flash("Signup disabled.", "danger")
+        return redirect(
+            url_for("auth.login")
+        )
+
     json = dumps({
         "name": data["name"],
         "password": generate_password_hash(data["password"])
     })
-    flash("Paste this JSON into the user list of your austeritas_config.json file, then restart the server: " + json, "success")
+    flash(gettext("Paste this JSON into the user list of your austeritas_config.json file, then restart the server: ") + json, "success")
     return redirect(
         url_for("auth.login")
     )

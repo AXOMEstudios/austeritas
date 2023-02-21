@@ -1,4 +1,5 @@
 from ..constants import SERVER_NAME
+from flask_babel import gettext
 
 class c:
     bold = "§l"

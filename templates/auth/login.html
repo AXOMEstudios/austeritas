@@ -4,10 +4,10 @@
 {% endblock %}
 {% block content %}
 <h1 class="title is-1">
-    Log in
+    {{_("Log in")}}
 </h1>
 <p>
-    Please enter the administration credentials below to log in to Austeritas.
+    {{_("Please enter the administration credentials below to log in to Austeritas.")}}
 </p>
 
 <form action="{{url_for('auth.run_login')}}" method="post">
@@ -17,15 +17,15 @@
 </form>
 <hr>
 <h1 class="title">
-    ... or generate a new user
+    {{_("... or generate a new user")}}
 </h1>
 <p>
-    Enter the wished credentials of the new user.
+    {{_("Enter the wished credentials of the new user.")}}
 </p>
 
 <form action="{{url_for('auth.new_user')}}" method="post">
     <input class="input my-1" type="text" placeholder="name" name="name">
     <input class="input my-1" type="password" placeholder="password" name="password">
-    <input class="button my-1" value="Generate JSON for new user" type="submit">
+    <input class="button my-1" value="{{_('Generate JSON for new user')}}" type="submit">
 </form>
 {% endblock content %}
