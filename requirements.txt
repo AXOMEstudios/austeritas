@@ -10,5 +10,5 @@ Jinja2==3.1.2
 MarkupSafe==2.1.2
 python-dotenv==0.21.1
 pytz==2022.7.1
-Werkzeug==2.2.2
+Werkzeug==2.2.3
 zipp==3.13.0
