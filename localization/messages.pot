@@ -1,0 +1,283 @@
+# Translations template for Austeritas.
+# Copyright (C) 2023 AXOME
+# This file is distributed under the same license as the Austeritas project.
+# Magnus Schlinsog <axomedev@gmail.com>, 2023.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0.0\n"
+"Report-Msgid-Bugs-To: axomedev@gmail.com\n"
+"POT-Creation-Date: 2023-02-21 13:13+0100\n"
+"PO-Revision-Date: 2023-02-21 14:00+0100\n"
+"Last-Translator: Magnus Schlinsog <axomedev@gmail.com>\n"
+"Language-Team: GERMAN <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.11.0\n"
+
+#: auth/__init__.py:48 auth/__init__.py:52
+msgid "Incorrect username or password."
+msgstr "Falscher Nutzername oder falsches Passwort."
+
+#: auth/__init__.py:63
+msgid ""
+"Paste this JSON into the user list of your austeritas_config.json file, "
+"then restart the server: "
+msgstr "Füge das nachfolgende JSON in die Nutzerliste der austeritas_config.json-Datei ein und starte dann den Server neu: "
+
+#: dashboard/__init__.py:25
+msgid "Added player to list of known players."
+msgstr "Name zur Liste der bekannten Spieler hinzugefügt."
+
+#: dashboard/__init__.py:27
+msgid "Player already on list."
+msgstr "Spieler ist bereits auf der Liste."
+
+#: dashboard/__init__.py:34
+msgid "Removed player from list of known players."
+msgstr "Spieler von der Liste der bekannten Spieler entfernt."
+
+#: dashboard/__init__.py:36
+msgid "Player not found on list."
+msgstr "Spieler nicht auf der Liste gefunden."
+
+#: dashboard/__init__.py:47
+#, python-format
+msgid "Gave one warning to %s"
+msgstr "Warnung an %s gegeben."
+
+#: dashboard/__init__.py:58
+#, python-format
+msgid ""
+"Automatic banning: %s banned (%s%s) for exceeding warning limit of %s "
+"warnings."
+msgstr "Automatisches Banning: %s wurde gebannt (%s%s), da er das Limit von %s Warnungen überschritten hat."
+
+#: dashboard/__init__.py:69
+#, python-format
+msgid "Automatic banning: Removed all warnings from %s due to policy."
+msgstr "Automatisches Banning: Alle Warnungen von %s wurden entfernt, da dies so eingestellt wurde."
+
+#: dashboard/__init__.py:75
+msgid "The player has no warnings."
+msgstr "Dieser Spieler hat keine Warnungen."
+
+#: dashboard/__init__.py:84
+#, python-format
+msgid "Removed one warning from %s."
+msgstr "Warnung von %s entfernt."
+
+#: dashboard/__init__.py:127 dashboard/__init__.py:156
+msgid "You must provide a player name."
+msgstr "Du musst einen Spielernamen angeben."
+
+#: dashboard/__init__.py:133
+msgid "Invalid input."
+msgstr "Ungültige Eingabe."
+
+#: dashboard/__init__.py:145
+msgid "Sent kick signal to server."
+msgstr "Kick-Signal an den Server gesendet."
+
+#: dashboard/__init__.py:165
+msgid "Choose a correct dimension."
+msgstr "Gib eine korrekte Zeitdimension an."
+
+#: dashboard/__init__.py:169
+msgid "Enter a time."
+msgstr "Gib eine Zeit an."
+
+#: dashboard/__init__.py:178
+#, python-format
+msgid "Player banned for %s %s."
+msgstr "Spieler gebannt für %s %s."
+
+#: dashboard/__init__.py:179
+msgid "Player banned permanently."
+msgstr "Spieler wurde permanent gebannt."
+
+#: dashboard/__init__.py:238
+msgid "Fill out all the fields!"
+msgstr "Fülle alle Felder aus!"
+
+#: dashboard/__init__.py:252
+msgid "Please enter a valid duration dimension."
+msgstr "Bitte gib eine valide Zeitdimension an."
+
+#: dashboard/__init__.py:261
+msgid "Automatic banning: Settings saved."
+msgstr "Automatisches Banning: Einstellungen übernommen."
+
+#: dashboard/__init__.py:278
+#, python-format
+msgid "%s has been unbanned. Otherwise, the ban would've ended on %s."
+msgstr "%s wurde entbannt. Der Bann wäre andererseits am %s ausgelaufen."
+
+#: templates/base.html:47 templates/dashboard/home.html:15
+msgid "Kick"
+msgstr "Kicken"
+
+#: templates/base.html:50 templates/dashboard/home.html:23
+msgid "Ban"
+msgstr "Bannen"
+
+#: templates/base.html:53
+msgid "Warnings"
+msgstr "Verwarnen"
+
+#: templates/base.html:56 templates/dashboard/etc.html:7
+#: templates/dashboard/home.html:31
+msgid "Miscellaneous"
+msgstr "Sonstiges"
+
+#: templates/base.html:72
+msgid "logged in as"
+msgstr "angemeldet als"
+
+#: templates/base.html:72
+msgid "Log out"
+msgstr "Abmelden"
+
+#: templates/auth/login.html:7
+msgid "Log in"
+msgstr "Anmelden"
+
+#: templates/auth/login.html:10
+msgid "Please enter the administration credentials below to log in to Austeritas."
+msgstr "Bitte gib deine Administrator-Nutzerdaten ein, um dich in Austeritas einzuloggen."
+
+#: templates/auth/login.html:20
+msgid "... or generate a new user"
+msgstr "... oder generiere einen neuen Nutzer."
+
+#: templates/auth/login.html:23
+msgid "Enter the wished credentials of the new user."
+msgstr "Gib die gewünschten Nutzerdaten ein."
+
+#: templates/auth/login.html:29
+msgid "Generate JSON for new user"
+msgstr "JSON für neuen Nutzer generieren"
+
+#: templates/dashboard/ban.html:8
+msgid "Ban a player"
+msgstr "Spieler bannen"
+
+#: templates/dashboard/ban.html:12 templates/dashboard/kick.html:11
+msgid "By specific gamertag"
+msgstr "Über bestimmten Gamertag"
+
+#: templates/dashboard/ban.html:18 templates/dashboard/kick.html:16
+msgid "Add player name to list of known people"
+msgstr "Spielernamen zur Liste der bekannten Spieler hinzufügen."
+
+#: templates/dashboard/ban.html:28
+msgid "Banned players"
+msgstr "Gebannte Spieler"
+
+#: templates/dashboard/ban.html:31
+msgid "Below, all players having a non-permanent ban are listed."
+msgstr "Folgend werden alle Spieler, die einen nicht-permanenten Bann haben, gelistet."
+
+#: templates/dashboard/ban.html:37
+msgid "Player"
+msgstr "Spieler"
+
+#: templates/dashboard/ban.html:40
+msgid "ban expires on"
+msgstr "Bann läuft aus am"
+
+#: templates/dashboard/ban.html:43
+msgid "unban?"
+msgstr "Entbannen?"
+
+#: templates/dashboard/ban.html:59
+msgid "Unban"
+msgstr "Bann entfernen"
+
+#: templates/dashboard/etc.html:12
+msgid "Automatic Banning"
+msgstr "Automatisches Banning"
+
+#: templates/dashboard/etc.html:14
+msgid ""
+"Automatically bans a player when the player exceeds a specific warning "
+"count."
+msgstr "Bannt automatisch jeden Spieler, der eine bestimmte Anzahl an Verwarnungen überschreitet."
+
+#: templates/dashboard/etc.html:20
+msgid "Ban players exceeding this limit"
+msgstr "Spieler, die dieses Limit überschreiten, bannen"
+
+#: templates/dashboard/etc.html:24
+msgid "Reset warnings upon ban happened"
+msgstr "Warnungen zurücksetzen, sobald Bann durchgeführt"
+
+#: templates/dashboard/etc.html:27
+msgid "Once limit reached, ban for..."
+msgstr "Wenn das Limit erreicht wird, banne für..."
+
+#: templates/dashboard/etc.html:30
+msgid "Save settings"
+msgstr "Einstellungen speichern"
+
+#: templates/dashboard/etc.html:34
+msgid "Edit list of known players"
+msgstr "Liste der bekannten Spieler"
+
+#: templates/dashboard/etc.html:58 templates/dashboard/kick.html:20
+#: templates/dashboard/warnings.html:40
+msgid "Add warning to player"
+msgstr "Warnung zu Spieler hinzufügen"
+
+#: templates/dashboard/etc.html:60
+msgid "Add player to list"
+msgstr "Spieler zu liste hinzufügen"
+
+#: templates/dashboard/home.html:7
+msgid "Dashboard - home"
+msgstr "Dashboard - Startseite"
+
+#: templates/dashboard/home.html:10
+msgid "What do you want to do?"
+msgstr "Was möchtest du tun?"
+
+#: templates/dashboard/home.html:16
+msgid ""
+"Kicking a player from the server temporarily removes the person from the "
+"game, but it's possible to re-join immediately."
+msgstr "Wenn ein Spieler gekickt wird, wird dieser temporär vom Server entfernt. Er kann aber sofort wieder den Server betreten."
+
+#: templates/dashboard/home.html:24
+msgid ""
+"Banning a player removes the access to the server for a specific amount "
+"of time or even permanently. The player can join again after the ban "
+"expired or was appealed."
+msgstr "Wenn ein Spieler gebannt wird, wird ihm der Serverzugriff für eine bestimmte Zeit entzogen. Der Spieler kann erst wieder beitreten, wenn sein Bann ausgelaufen ist oder entfernt wurde."
+
+#: templates/dashboard/home.html:32
+msgid "Set miscellaneous options for general server management."
+msgstr "Ändere sonstige Einstellungen zum generellen Management deines Servers."
+
+#: templates/dashboard/warnings.html:7
+msgid "Warned players"
+msgstr "Verwarnte Spieler"
+
+#: templates/dashboard/components/list.html:2
+msgid "Paste in a name from the list of known players"
+msgstr "Füge einen Namen aus der Liste der bekannten Spieler ein"
+
+#: templates/dashboard/components/list.html:8
+msgid "Edit list"
+msgstr "Liste bearbeiten"
+
+#: templates/main/main.html:10
+msgid ""
+"This server is running the Austeritas remote moderation system for "
+"Bedrock Dedicated Servers (BDS)."
+msgstr "Dieser Server führt das Austeritas Remote-Moderationssystem für Bedrock Dedicated Server (BDS) aus."
+
+#: templates/main/main.html:14
+msgid "Log in to continue"
+msgstr "Anmelden, um fortzufahren."

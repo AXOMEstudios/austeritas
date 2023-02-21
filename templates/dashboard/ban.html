@@ -5,17 +5,17 @@
 
 {% block content %}
 <h1 class="title is-1">
-    Ban a player
+    {{_("Ban a player")}}
 </h1><hr>
 <div class="columns">
     <div class="column">
-        <h2 class="subtitle">By specific gamertag</h2>
+        <h2 class="subtitle">{{_("By specific gamertag")}}</h2>
         <form action="{{url_for('dashboard.run_ban')}}" method="post">
             <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
             {% include "dashboard/components/ban_duration_picker.html" %}
             <label class="checkbox my-2">
                 <input type="checkbox" name="remember">
-                Add player name to list of known people
+                {{_("Add player name to list of known people")}}
             </label><br>
             <input class="button is-danger my-1 is-fullwidth" value="Ban" type="submit">
         </form>
@@ -25,22 +25,22 @@
 </div>
 <hr>
 <h2 class="subtitle">
-    Banned players
+    {{_("Banned players")}}
 </h2>
 <p>
-    Below, all players having a non-permanent ban are listed.
+    {{_("Below, all players having a non-permanent ban are listed.")}}
 </p>
 <table>
     <thead>
         <tr>
             <th>
-                Player
+                {{_("Player")}}
             </th>
             <th>
-                ban expires on
+                {{_("ban expires on")}}
             </th>
             <th>
-                unban?
+                {{_("unban?")}}
             </th>
         </tr>
     </thead>
@@ -56,7 +56,7 @@
                 <form action="{{url_for('dashboard.run_unban')}}" method="post">
                     <input type="hidden" name="player" value="{{player}}">
                     <button class="button is-success">
-                        Unban
+                        {{_("Unban")}}
                     </button>
                 </form>
             </td>

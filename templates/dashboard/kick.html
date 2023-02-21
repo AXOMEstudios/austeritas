@@ -8,16 +8,16 @@
 </h1><hr>
 <div class="columns">
     <div class="column">
-        <h2 class="subtitle">By specific gamertag</h2>
+        <h2 class="subtitle">{{_("By specific gamertag")}}</h2>
         <form action="{{url_for('dashboard.run_kick')}}" method="post">
             <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
             <label class="checkbox my-2">
             <input type="checkbox" name="remember">
-                Add player name to list of known people
+                {{_("Add player name to list of known people")}}
             </label><br>
             <label class="checkbox my-2">
                 <input type="checkbox" name="warn">
-                Add warning to player
+                {{_("Add warning to player")}}
             </label><br>
             <input class="button is-danger my-1 is-fullwidth" value="Kick" type="submit">
         </form>

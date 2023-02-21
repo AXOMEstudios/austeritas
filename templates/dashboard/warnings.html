@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
 <h1 class="title is-1">
-    Warned players
+    {{_("Warned players")}}
 </h1>
 
 <div class="columns">
@@ -37,7 +37,7 @@
         <h2 class="subtitle"></h2>
         <form action="{{url_for('dashboard.add_warn_route')}}" method="post">
             <input type="text" class="input my-2" placeholder="gamertag of player you'd like to warn" name="player" id="gamertag">
-            <button class="button is-danger">Add warning to player</button>
+            <button class="button is-danger">{{_("Add warning to player")}}</button>
         </form>
     </div>
     {% include "/dashboard/components/list.html" %}

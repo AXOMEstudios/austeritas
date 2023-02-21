@@ -13,6 +13,7 @@
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
+      <link rel="preload" href="/static/assets/script.js" as="script">
 
       {% block head %}
       {% endblock %}
@@ -44,16 +45,16 @@
         <div class="navbar-start">
           {% if g.user %}
             <a class="navbar-item" href="{{url_for('dashboard.kick')}}">
-              Kick
+              {{_("Kick")}}
             </a>
             <a class="navbar-item" href="{{url_for('dashboard.ban')}}">
-              Ban
+              {{_("Ban")}}
             </a>
             <a class="navbar-item" href="{{url_for('dashboard.warnings')}}">
-              Warnings
+              {{_("Warnings")}}
             </a>
             <a class="navbar-item" href="{{url_for('dashboard.etc')}}">
-              Miscellaneous
+              {{_("Miscellaneous")}}
             </a>
           {% else %}
           
@@ -69,7 +70,7 @@
                 </a>
               {% else %}
                 <a class="button" href="{{url_for('auth.logout')}}">
-                    logged in as {{g.user}} (<strong>Log out</strong>)
+                  {{_("logged in as")}} {{g.user}} (<strong>{{_("Log out")}}</strong>)
                 </a>
               {% endif %}
             </div>
@@ -99,7 +100,7 @@
       </div>
     </section>
 
-    <script src="/static/assets/script.js"></script>
+    <script src="/static/assets/script.js" defer></script>
 
   </body>
 </html>
