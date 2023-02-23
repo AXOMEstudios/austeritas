@@ -325,3 +325,6 @@ msgstr "Spieler hinzufügen"
 #: templates/dashboard/etc.html:45
 msgid "Remove player"
 msgstr "Spieler entfernen"
+
+msgid "%s has been unbanned. Otherwise, the ban would've never ended."
+msgstr "%s wurde entbannt. Der Bann wäre ansonsten nie ausgelaufen, da er permanent war."

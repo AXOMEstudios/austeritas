@@ -100,7 +100,7 @@ def ban():
     known = load_json(DATA_FILENAME)["known_players"]
     banned_players = load_json(DATA_FILENAME)["bans"]
     banned_players = {
-        player: datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') for player, expiration in banned_players.items()
+        player: (datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') if expiration != "permanent" else "permanent") for player, expiration in banned_players.items()
     }
     return render_template("dashboard/ban.html", list_of_players = known, banned_players = banned_players, clock_rate = round(CLOCK_INTERVAL / 60))
 
@@ -165,11 +165,17 @@ def run_ban():
         flash(gettext("Choose a correct dimension."), "danger")
         return redirect(url_for("dashboard.ban"))
     
-    if not data["duration"]:
+    if data["duration-dimension"] != "permanent" and (not data["duration"]):
         flash(gettext("Enter a time."), "danger")
         return redirect(url_for("dashboard.ban"))
+    
+    res_duration = 0
+    if data["duration-dimension"] == "permanent":
+        res_duration = 1
+    else:
+        res_duration = data["duration"]
 
-    duration_in_seconds = int(data["duration"]) * DIMENSIONS_TRANSLATED[
+    duration_in_seconds = int(res_duration) * DIMENSIONS_TRANSLATED[
         data["duration-dimension"]
     ]
     ban_end_timestamp = round(time.time()) + duration_in_seconds
@@ -245,7 +251,7 @@ def auto_ban():
         "reset_warns": "on" if "reset_warns" in data.keys() else "off",
         "max_warnings": int(data["max_warnings"]),
         "duration-dimension": data["duration-dimension"],
-        "duration": int(data["duration"])
+        "duration": (int(data["duration"]) if data["duration-dimension"] != "permanent" else 1)
     }
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
@@ -275,8 +281,11 @@ def run_unban():
     del _tmp["bans"][data["player"]]
     write_json(_tmp, DATA_FILENAME)
     
-    flash(gettext("%s has been unbanned. Otherwise, the ban would've ended on %s.") % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
-    
+    if expiration != "permanent":
+        flash(gettext("%s has been unbanned. Otherwise, the ban would've ended on %s.") % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
+    else:
+        flash(gettext("%s has been unbanned. Otherwise, the ban would've never ended.") % data["player"], "success")
+
     return redirect(
         url_for("dashboard.ban")
     )

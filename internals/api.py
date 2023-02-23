@@ -39,10 +39,9 @@ def execute_ban(player, duration = "permanent"):
     for command in commands_to_execute:
         type_into_server_console(command)
 
-    if duration != "permanent":
-        _tmp = load_json(DATA_FILENAME)
-        _tmp["bans"][player] = duration
-        write_json(_tmp, DATA_FILENAME)
+    _tmp = load_json(DATA_FILENAME)
+    _tmp["bans"][player] = duration
+    write_json(_tmp, DATA_FILENAME)
 
 def execute_unban(player):
     if not validate_player_name(player): return
