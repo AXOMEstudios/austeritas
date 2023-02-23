@@ -9,26 +9,46 @@
 
 <div class="columns">
     <div class="column">
-        <h2>{{_("Automatic Banning")}}</h2>
-        <p>
-            <strong>{{_("Automatically bans a player when the player exceeds a specific warning count.")}}</strong>
-        </p>
-        <form action="{{url_for('dashboard.auto_ban')}}" method="post">
-            <input type="number" name="max_warnings" placeholder="warnings to get banned" class="input" value="{{abs['max_warnings']}}">
-            <label class="checkbox my-1">
-                <input type="checkbox" name="do_autoban" value="{{abs['do_autoban']}}" {% if abs['do_autoban'] == "on" %}checked{% endif %}>
-                {{_("Ban players exceeding this limit")}}
-            </label><br>
-            <label class="checkbox my-1">
-                <input type="checkbox" name="reset_warns" value="{{abs['reset_warns']}}" {% if abs['reset_warns'] == "on" %}checked{% endif %}>
-                {{_("Reset warnings upon ban happened")}}
-            </label><br>
-            <label>
-                <strong>{{_("Once limit reached, ban for...")}}</strong>
-            </label>
-            {% include "dashboard/components/ban_duration_picker.html" %}
-            <button class="button is-success">{{_("Save settings")}}</button>
-        </form>
+        <div>
+            <h2>{{_("Automatic Banning")}}</h2>
+            <p>
+                <strong>{{_("Automatically bans a player when the player exceeds a specific warning count.")}}</strong>
+            </p>
+            <form action="{{url_for('dashboard.auto_ban')}}" method="post">
+                <input type="number" name="max_warnings" placeholder="warnings to get banned" class="input" value="{{abs['max_warnings']}}">
+                <label class="checkbox my-1">
+                    <input type="checkbox" name="do_autoban" value="{{abs['do_autoban']}}" {% if abs['do_autoban'] == "on" %}checked{% endif %}>
+                    {{_("Ban players exceeding this limit")}}
+                </label><br>
+                <label class="checkbox my-1">
+                    <input type="checkbox" name="reset_warns" value="{{abs['reset_warns']}}" {% if abs['reset_warns'] == "on" %}checked{% endif %}>
+                    {{_("Reset warnings upon ban happened")}}
+                </label><br>
+                <label>
+                    <strong>{{_("Once limit reached, ban for...")}}</strong>
+                </label>
+                {% include "dashboard/components/ban_duration_picker.html" %}
+                <button class="button is-success">{{_("Save settings")}}</button>
+            </form>
+        </div>
+        <hr>
+        <div>
+            <h2>{{_("Edit allowlist")}}</h2>
+            <form action="{{url_for('dashboard.edit_whitelist')}}" method="post">
+                <div class="control">
+                    <label class="radio">
+                      <input type="radio" name="mode" value="add">
+                      {{_("Add player")}}
+                    </label>
+                    <label class="radio">
+                      <input type="radio" name="mode" value="remove">
+                      {{_("Remove player")}}
+                    </label>
+                </div>
+                <input type="text" name="player" placeholder="Player name" class="input my-2">
+                <input type="submit" value="Okay" class="button is-success">
+            </form>
+        </div>
     </div>
     <div class="column">
         <h2>{{_("Edit list of known players")}}</h2>

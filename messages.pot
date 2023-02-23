@@ -1,0 +1,23 @@
+#: dashboard/__init__.py:290
+msgid "Provide an operation mode."
+msgstr "Gib an, welche Operation Du durchführen möchtest."
+
+#: dashboard/__init__.py:292
+msgid "Provide a valid player name."
+msgstr "Gib einen gültigen Spielernamen an."
+
+#: dashboard/__init__.py:298
+msgid "Successfully sent editing request to server."
+msgstr "Bearbeitungsanfrage erfolgreich an den Server gesandt."
+
+#: templates/dashboard/etc.html:36
+msgid "Edit allowlist"
+msgstr "Allowlist bearbeiten"
+
+#: templates/dashboard/etc.html:41
+msgid "Add player"
+msgstr "Spieler hinzufügen"
+
+#: templates/dashboard/etc.html:45
+msgid "Remove player"
+msgstr "Spieler entfernen"

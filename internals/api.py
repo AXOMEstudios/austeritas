@@ -57,3 +57,11 @@ def send_chat_warning(player, warnings):
     type_into_server_console(
         "say %s" % construct_warning_message_chat(player, warnings)
     )
+
+def whitelist_operation(player, mode = "add"):
+    if not mode in ["add", "remove"]: return
+    if not validate_player_name(player): return
+
+    type_into_server_console(
+        "allowlist %s %s" % (mode, player)
+    )

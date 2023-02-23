@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, url_for, flash, redirect
 from ..helpers import login_required, load_json, write_json, validate_player_name
 from ..constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
-from ..internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban
+from ..internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban, whitelist_operation
 import time
 from datetime import datetime
 from flask_babel import gettext
@@ -279,4 +279,24 @@ def run_unban():
     
     return redirect(
         url_for("dashboard.ban")
+    )
+
+@dashboard.route("/etc/edit_whitelist", methods = ["POST"])
+@login_required
+def edit_whitelist():
+    data = request.form
+
+    if not "mode" in data.keys():
+        flash(gettext("Provide an operation mode."), "danger")
+    elif (not "player" in data.keys()) or (not data["player"]) or (not validate_player_name(data["player"])):
+        flash(gettext("Provide a valid player name."), "danger")
+    else:
+        whitelist_operation(
+            data["player"],
+            data["mode"]
+        )
+        flash(gettext("Successfully sent editing request to server."), "success")
+
+    return redirect(
+        url_for("dashboard.etc")
     )
