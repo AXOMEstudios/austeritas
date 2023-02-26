@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - ban appeal
+{% endblock %}
+{% block content %}
+<h1 class="title is-1">
+    {{_("Report mistaken ban")}}
+</h1>
+<p>
+    {{_("In case you got banned and you think this is a mistake, you can appeal your ban below.")}}
+</p>
+<hr>
+
+<form action="{{url_for('player_support.appeal')}}" method="post">
+    <label>
+        <strong>Your in-game name: </strong>
+        <input type="text" name="player" class="input" placeholder="in-game player tag">
+    </label>
+    <label>
+        <strong>Why you think the ban was a mistake:</strong>
+        <textarea name="reason" rows="5" class="textarea" placeholder="describe what you did when you got banned, why the ban is unreasonable and provide, if you have any, proof for that."></textarea>
+    </label>
+    <input type="submit" value="Appeal ban" class="button is-success is-large my-3">
+</form>
+{% endblock content %}

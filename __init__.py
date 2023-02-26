@@ -3,7 +3,8 @@ from flask import Flask
 from .auth import auth
 from .dashboard import dashboard
 from .main import main
-from .constants import DEBUG, HAS_HTTPS, LANGUAGE
+from .player_support import player_support
+from .constants import DEBUG, HAS_HTTPS, LANGUAGE, MAX_CONTENT_SIZE
 
 from .internals.clock import init_clock
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ def create_app():
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(dashboard)
+    app.register_blueprint(player_support)
 
     app.config["TEMPLATES_AUTO_RELOAD"]     = DEBUG
     app.config["SECRET_KEY"]                = getenv("SECRET_KEY")
@@ -27,5 +29,6 @@ def create_app():
     app.config["SESSION_COOKIE_HTTPONLY"]   = True
     app.config["SESSION_COOKIE_SAMESITE"]   = "Strict"
     app.config["BABEL_DEFAULT_LOCALE"]      = "en"
+    app.config["MAX_CONTENT_LENGTH"]        = MAX_CONTENT_SIZE
 
     return app

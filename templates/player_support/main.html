@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - player support
+{% endblock %}
+{% block content %}
+<h1 class="title is-1">
+    {{_("Player support - home")}}
+</h1>
+<hr>
+<h2 class="subtitle">{{_("What do you want to do?")}}</h2>
+<div class="columns">
+    <div class="column">
+        <a href="{{url_for('player_support.appeal')}}">
+            <div class="box">
+                <h1 class="title">{{_("Appeal a ban")}}</h1>
+                <p>{{_("If you got banned and think this is a mistake, you can report it here to get your ban reviewed.")}}</p>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="{{url_for('player_support.status')}}">
+            <div class="box">
+                <h1 class="title">{{_("Read your player status")}}</h1>
+                <p>{{_("Here you can find out how many warnings you have and how long you are still banned.")}}</p>
+            </div>
+        </a>
+    </div>
+    <div class="column">
+        <a href="{{url_for('player_support.message')}}">
+            <div class="box">
+                <h1 class="title">{{_("Send a mod-message")}}</h1>
+                <p>{{_("In the case you noticed something you need to tell a server moderator, you can write them a message here.")}}</p>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock content %}

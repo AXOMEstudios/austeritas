@@ -8,3 +8,6 @@ CLOCK_INTERVAL                          = 10 * 60                               
 SCREEN_PROCESS_NAME                     = "bedrock-server"
 LANGUAGE                                = "de"                                                              # supported: en, de
 ALLOW_NEW_USERS                         = False                                                             # recommended: False
+APPEAL_LIMIT                            = "20/hour"
+MESSAGE_LIMIT                           = "30/hour"
+MAX_CONTENT_SIZE                        = 10 * 1024                                                         # 10 KB

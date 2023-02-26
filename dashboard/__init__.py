@@ -309,3 +309,8 @@ def edit_whitelist():
     return redirect(
         url_for("dashboard.etc")
     )
+
+@dashboard.route("/player_support/")
+@login_required
+def player_support():
+    pass
