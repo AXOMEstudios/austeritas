@@ -2,9 +2,10 @@
 
 from constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
 from json import dump
+import uuid
 
 print("[WARNING] This will overwrite all Austeritas configuration files and therefore remove bans, mod messages, known players, registered admin credentials and much more. Are you sure you want to continue? (y/(n))")
-if input("(y/n) >>") != "y": raise KeyboardInterrupt
+if input("(y/n) >> ") != "y": raise KeyboardInterrupt
 print("Writing files...")
 
 DATA_SKELETON = {
@@ -29,9 +30,12 @@ CONFIG_SKELETON = {
 }
 
 with open(DATA_FILENAME, "w") as f:
-    dump(DATA_SKELETON, f)
+    dump(DATA_SKELETON, f, indent = 4)
 
 with open(CONFIG_FILENAME, "w") as f:
-    dump(CONFIG_SKELETON, f)
+    dump(CONFIG_SKELETON, f, indent = 4)
+
+with open(".env", "w") as f:
+    f.write("SECRET_KEY=" + str(uuid.uuid4()))
 
 print("Austeritas files have been written successfully.")

@@ -44,7 +44,7 @@ def validate_csrf_token(token, session_token, action):
 
 def write_json(json, filename=CONFIG_FILENAME):
     with open(filename, "w") as f:
-        dump(json, f)
+        dump(json, f, indent = 4)
         return json
 
 def load_json(filename=CONFIG_FILENAME):
