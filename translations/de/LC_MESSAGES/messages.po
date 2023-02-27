@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version:  1.0.0\n"
 "Report-Msgid-Bugs-To: axomedev@gmail.com\n"
-"POT-Creation-Date: 2023-02-21 13:13+0100\n"
+"POT-Creation-Date: 2023-02-27 17:23+0100\n"
 "PO-Revision-Date: 2023-02-21 13:33+0100\n"
 "Last-Translator: Magnus Schlinsog <axomedev@gmail.com>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Incorrect username or password."
 msgstr "Falscher Nutzername oder falsches Passwort."
 
-#: auth/__init__.py:63
+#: auth/__init__.py:69
 msgid ""
 "Paste this JSON into the user list of your austeritas_config.json file, "
 "then restart the server: "
@@ -80,7 +80,8 @@ msgstr "Warnung von %s entfernt."
 msgid "You must provide a player name."
 msgstr "Du musst einen Spielernamen angeben."
 
-#: dashboard/__init__.py:133
+#: dashboard/__init__.py:133 dashboard/__init__.py:341
+#: player_support/__init__.py:68
 msgid "Invalid input."
 msgstr "Ungültige Eingabe."
 
@@ -96,54 +97,162 @@ msgstr "Gib eine korrekte Zeitdimension an."
 msgid "Enter a time."
 msgstr "Gib eine Zeit an."
 
-#: dashboard/__init__.py:178
+#: dashboard/__init__.py:184
 #, python-format
 msgid "Player banned for %s %s."
 msgstr "Spieler gebannt für %s %s."
 
-#: dashboard/__init__.py:179
+#: dashboard/__init__.py:185
 msgid "Player banned permanently."
 msgstr "Spieler wurde permanent gebannt."
 
-#: dashboard/__init__.py:238
+#: dashboard/__init__.py:244
 msgid "Fill out all the fields!"
 msgstr "Fülle alle Felder aus!"
 
-#: dashboard/__init__.py:252
+#: dashboard/__init__.py:258
 msgid "Please enter a valid duration dimension."
 msgstr "Bitte gib eine valide Zeitdimension an."
 
-#: dashboard/__init__.py:261
+#: dashboard/__init__.py:267
 msgid "Automatic banning: Settings saved."
 msgstr "Automatisches Banning: Einstellungen übernommen."
 
-#: dashboard/__init__.py:278
+#: dashboard/__init__.py:285
 #, python-format
 msgid "%s has been unbanned. Otherwise, the ban would've ended on %s."
 msgstr "%s wurde entbannt. Der Bann wäre andererseits am %s ausgelaufen."
 
-#: templates/base.html:47 templates/dashboard/home.html:15
+#: dashboard/__init__.py:287
+#, python-format
+msgid "%s has been unbanned. Otherwise, the ban would've never ended."
+msgstr ""
+"%s wurde entbannt. Der Bann wäre ansonsten nie ausgelaufen, da er "
+"permanent war."
+
+#: dashboard/__init__.py:299
+msgid "Provide an operation mode."
+msgstr "Gib an, welche Operation Du durchführen möchtest."
+
+#: dashboard/__init__.py:301
+msgid "Provide a valid player name."
+msgstr "Gib einen gültigen Spielernamen an."
+
+#: dashboard/__init__.py:307
+msgid "Successfully sent editing request to server."
+msgstr "Bearbeitungsanfrage erfolgreich an den Server gesandt."
+
+#: dashboard/__init__.py:333
+msgid "Suspicious activity detected. Logging you out."
+msgstr "Verdächtiges Verhalten erkannt. Du wirst abgemeldet."
+
+#: dashboard/__init__.py:337
+msgid ""
+"The ban did expire the moment you were loading this page and is no longer"
+" up-to-date."
+msgstr "Der Bann ist im Moment, im dem du diese Seite geladen hast, ausgelaufen und daher nicht mehr aktuell."
+
+#: dashboard/__init__.py:350
+msgid "Appeal approved. Player unbanned."
+msgstr "Antrag angenommen. Der Spieler wurde entbannt."
+
+#: dashboard/__init__.py:354
+msgid "Ban appeal successfully rejected."
+msgstr "Entbannungs-Antrag erfolgreich abgelehnt."
+
+#: dashboard/__init__.py:371
+msgid "Message closed."
+msgstr "Nachricht geschlossen."
+
+#: player_support/__init__.py:27
+#, fuzzy
+msgid "Invalid player name."
+msgstr "Gib einen gültigen Spielernamen an."
+
+#: player_support/__init__.py:38
+msgid ""
+"You did already appeal and you got rejected. You'll have to wait until "
+"your ban expires, then you are allowed to play again."
+msgstr "Du hast bereits einen Antrag eingereicht, der aber von einem Moderator abgelehnt wurde. Somit musst du warten, bis dein Bann ausläuft. Dann darfst du wieder spielen."
+
+#: player_support/__init__.py:40
+msgid ""
+"Sorry, but your former appeal already got rejected. Therefore, you won't "
+"be able to appeal anymore and your ban will stay permanent."
+msgstr "Entschuldigung, aber dein ursprünglicher Entbannungs-Antrag wurde schon von einem Administrator abgelehnt. Noch einen Antrag darfst du nicht stellen und dein Bann bleibt nun permanent."
+
+#: player_support/__init__.py:45
+#, fuzzy
+msgid "This player has nothing to appeal."
+msgstr "Dieser Spieler hat keine Warnungen."
+
+#: player_support/__init__.py:56
+msgid "The appeal has been sent and will soon be processed by an administrator."
+msgstr "Dein Entbannungs-Antrag wurde gesendet und wird sicher bald von einem Administrator angesehen."
+
+#: player_support/__init__.py:75
+#, fuzzy, python-format
+msgid "Player is banned."
+msgstr "Spieler gebannt für %s %s."
+
+#: player_support/__init__.py:78
+#, fuzzy, python-format
+msgid "Ban expiry: %s"
+msgstr "Bann läuft aus: %s"
+
+#: player_support/__init__.py:83
+#, python-format
+msgid "Ban appeal sent. Message: %s"
+msgstr "Entbannungsantrag eingereicht. Beigelegte Nachricht: %s"
+
+#: player_support/__init__.py:87
+#, python-format
+msgid "Admin response to ban appeal: %s"
+msgstr "Admin-Antwort zum Antrag: %s"
+
+#: player_support/__init__.py:91
+msgid "No admin response to any ban appeals yet."
+msgstr "Noch keine Admin-Antwort liegt zu diesem Antrag vor."
+
+#: player_support/__init__.py:96
+#, fuzzy, python-format
+msgid "Player has warning(s): %s warnings given"
+msgstr "Dieser Spieler hat %s Warnungen."
+
+#: player_support/__init__.py:101
+msgid "No significant information about this player."
+msgstr "Keine signifikanten Informationen über diesen Spieler liegen vor."
+
+#: player_support/__init__.py:119
+msgid "We received your message."
+msgstr "Wir haben deine Nachricht erhalten."
+
+#: templates/base.html:48 templates/dashboard/home.html:15
 msgid "Kick"
 msgstr "Kicken"
 
-#: templates/base.html:50 templates/dashboard/home.html:23
+#: templates/base.html:51 templates/dashboard/home.html:23
 msgid "Ban"
 msgstr "Bannen"
 
-#: templates/base.html:53
+#: templates/base.html:54
 msgid "Warnings"
 msgstr "Verwarnen"
 
-#: templates/base.html:56 templates/dashboard/etc.html:7
+#: templates/base.html:57
+msgid "Player support messages"
+msgstr "Support-Nachrichten"
+
+#: templates/base.html:60 templates/dashboard/etc.html:7
 #: templates/dashboard/home.html:31
 msgid "Miscellaneous"
 msgstr "Sonstiges"
 
-#: templates/base.html:72
+#: templates/base.html:76
 msgid "logged in as"
 msgstr "angemeldet als"
 
-#: templates/base.html:72
+#: templates/base.html:76
 msgid "Log out"
 msgstr "Abmelden"
 
@@ -207,11 +316,11 @@ msgstr "Entbannen?"
 msgid "Unban"
 msgstr "Bann entfernen"
 
-#: templates/dashboard/etc.html:12
+#: templates/dashboard/etc.html:13
 msgid "Automatic Banning"
 msgstr "Automatisches Banning"
 
-#: templates/dashboard/etc.html:14
+#: templates/dashboard/etc.html:15
 msgid ""
 "Automatically bans a player when the player exceeds a specific warning "
 "count."
@@ -219,32 +328,44 @@ msgstr ""
 "Bannt automatisch jeden Spieler, der eine bestimmte Anzahl an "
 "Verwarnungen überschreitet."
 
-#: templates/dashboard/etc.html:20
+#: templates/dashboard/etc.html:21
 msgid "Ban players exceeding this limit"
 msgstr "Spieler, die dieses Limit überschreiten, bannen"
 
-#: templates/dashboard/etc.html:24
+#: templates/dashboard/etc.html:25
 msgid "Reset warnings upon ban happened"
 msgstr "Warnungen zurücksetzen, sobald Bann durchgeführt"
 
-#: templates/dashboard/etc.html:27
+#: templates/dashboard/etc.html:28
 msgid "Once limit reached, ban for..."
 msgstr "Wenn das Limit erreicht wird, banne für..."
 
-#: templates/dashboard/etc.html:30
+#: templates/dashboard/etc.html:31
 msgid "Save settings"
 msgstr "Einstellungen speichern"
 
-#: templates/dashboard/etc.html:34
+#: templates/dashboard/etc.html:36
+msgid "Edit allowlist"
+msgstr "Allowlist bearbeiten"
+
+#: templates/dashboard/etc.html:41
+msgid "Add player"
+msgstr "Spieler hinzufügen"
+
+#: templates/dashboard/etc.html:45
+msgid "Remove player"
+msgstr "Spieler entfernen"
+
+#: templates/dashboard/etc.html:54
 msgid "Edit list of known players"
 msgstr "Liste der bekannten Spieler"
 
-#: templates/dashboard/etc.html:58 templates/dashboard/kick.html:20
+#: templates/dashboard/etc.html:78 templates/dashboard/kick.html:20
 #: templates/dashboard/warnings.html:40
 msgid "Add warning to player"
 msgstr "Warnung zu Spieler hinzufügen"
 
-#: templates/dashboard/etc.html:60
+#: templates/dashboard/etc.html:80
 msgid "Add player to list"
 msgstr "Spieler zu liste hinzufügen"
 
@@ -252,7 +373,7 @@ msgstr "Spieler zu liste hinzufügen"
 msgid "Dashboard - home"
 msgstr "Dashboard - Startseite"
 
-#: templates/dashboard/home.html:10
+#: templates/dashboard/home.html:10 templates/player_support/main.html:10
 msgid "What do you want to do?"
 msgstr "Was möchtest du tun?"
 
@@ -278,6 +399,26 @@ msgstr ""
 msgid "Set miscellaneous options for general server management."
 msgstr "Ändere sonstige Einstellungen zum generellen Management deines Servers."
 
+#: templates/dashboard/player_support.html:7
+msgid "Player support"
+msgstr "Support"
+
+#: templates/dashboard/player_support.html:13
+msgid "Ban appeals"
+msgstr "Entbannungsanträge"
+
+#: templates/dashboard/player_support.html:29
+msgid "Reject"
+msgstr "Ablehnen"
+
+#: templates/dashboard/player_support.html:38
+msgid "Approve + unban"
+msgstr "Annehmen und entbannen"
+
+#: templates/dashboard/player_support.html:62
+msgid "Delete"
+msgstr "Löschen"
+
 #: templates/dashboard/warnings.html:7
 msgid "Warned players"
 msgstr "Verwarnte Spieler"
@@ -302,29 +443,68 @@ msgstr ""
 msgid "Log in to continue"
 msgstr "Anmelden, um fortzufahren."
 
-#: dashboard/__init__.py:290
-msgid "Provide an operation mode."
-msgstr "Gib an, welche Operation Du durchführen möchtest."
+#: templates/main/main.html:20
+msgid "Player support platform"
+msgstr "Spieler-Support-Plattform"
 
-#: dashboard/__init__.py:292
-msgid "Provide a valid player name."
-msgstr "Gib einen gültigen Spielernamen an."
+#: templates/player_support/appeal.html:7
+msgid "Report mistaken ban"
+msgstr "Falschen Bann melden"
 
-#: dashboard/__init__.py:298
-msgid "Successfully sent editing request to server."
-msgstr "Bearbeitungsanfrage erfolgreich an den Server gesandt."
+#: templates/player_support/appeal.html:10
+msgid ""
+"In case you got banned and you think this is a mistake, you can appeal "
+"your ban below."
+msgstr "Falls du gebannt wurdest und der Meinung bist, dass dies ein Fehler gewesen sein muss, kannst du hier einen Entbannungsantrag stellen."
 
-#: templates/dashboard/etc.html:36
-msgid "Edit allowlist"
-msgstr "Allowlist bearbeiten"
+#: templates/player_support/main.html:7
+msgid "Player support - home"
+msgstr "Spieler-Support - Startseite"
 
-#: templates/dashboard/etc.html:41
-msgid "Add player"
-msgstr "Spieler hinzufügen"
+#: templates/player_support/main.html:15
+msgid "Appeal a ban"
+msgstr "Entbannungsantrag stellen"
 
-#: templates/dashboard/etc.html:45
-msgid "Remove player"
-msgstr "Spieler entfernen"
+#: templates/player_support/main.html:16
+msgid ""
+"If you got banned and think this is a mistake, you can report it here to "
+"get your ban reviewed."
+msgstr "Wenn du gebannt wurdest und glaubst, dass dies falsch war, kannst du dies hier melden und dein Bann wird noch einmal untersucht."
 
-msgid "%s has been unbanned. Otherwise, the ban would've never ended."
-msgstr "%s wurde entbannt. Der Bann wäre ansonsten nie ausgelaufen, da er permanent war."
+#: templates/player_support/main.html:23
+msgid "Read your player status"
+msgstr "Spielerstatus auslesen"
+
+#: templates/player_support/main.html:24
+msgid ""
+"Here you can find out how many warnings you have and how long you are "
+"still banned."
+msgstr "Hier kannst du herausfinden, wie viele Warnungen du hast und wie lange du noch gebannt bleibst."
+
+#: templates/player_support/main.html:31
+msgid "Send a mod-message"
+msgstr "Modnachricht senden"
+
+#: templates/player_support/main.html:32
+msgid ""
+"In the case you noticed something you need to tell a server moderator, "
+"you can write them a message here."
+msgstr "Falls du etwas Wichtges gesehen oder mitzuteilen hast, kannst du es hier an einen Server-Moderator senden."
+
+#: templates/player_support/message.html:7
+msgid "Message a mod"
+msgstr "Moderator kontaktieren"
+
+#: templates/player_support/message.html:10
+msgid "Using this form, you can message a moderator about a specific topic."
+msgstr "Mithilfe dieses Formulars kannst du einen Moderator über etwas Bestimmtes informieren."
+
+#: templates/player_support/status.html:7
+#, fuzzy
+msgid "Read player status"
+msgstr "Verwarnte Spieler"
+
+#: templates/player_support/status.html:10
+msgid "Enter your name below to gather information about yourself on the server."
+msgstr "Gib deinen Namen unten ein, um Informationen über dich auf dem Server zu erhalten."
+

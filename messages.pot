@@ -1,23 +1,464 @@
-#: dashboard/__init__.py:290
+#: auth/__init__.py:48 auth/__init__.py:52
+msgid "Incorrect username or password."
+msgstr ""
+
+#: auth/__init__.py:69
+msgid ""
+"Paste this JSON into the user list of your austeritas_config.json file, "
+"then restart the server: "
+msgstr ""
+
+#: dashboard/__init__.py:25
+msgid "Added player to list of known players."
+msgstr ""
+
+#: dashboard/__init__.py:27
+msgid "Player already on list."
+msgstr ""
+
+#: dashboard/__init__.py:34
+msgid "Removed player from list of known players."
+msgstr ""
+
+#: dashboard/__init__.py:36
+msgid "Player not found on list."
+msgstr ""
+
+#: dashboard/__init__.py:47
+#, python-format
+msgid "Gave one warning to %s"
+msgstr ""
+
+#: dashboard/__init__.py:58
+#, python-format
+msgid ""
+"Automatic banning: %s banned (%s%s) for exceeding warning limit of %s "
+"warnings."
+msgstr ""
+
+#: dashboard/__init__.py:69
+#, python-format
+msgid "Automatic banning: Removed all warnings from %s due to policy."
+msgstr ""
+
+#: dashboard/__init__.py:75
+msgid "The player has no warnings."
+msgstr ""
+
+#: dashboard/__init__.py:84
+#, python-format
+msgid "Removed one warning from %s."
+msgstr ""
+
+#: dashboard/__init__.py:127 dashboard/__init__.py:156
+msgid "You must provide a player name."
+msgstr ""
+
+#: dashboard/__init__.py:133 dashboard/__init__.py:341
+#: player_support/__init__.py:68
+msgid "Invalid input."
+msgstr ""
+
+#: dashboard/__init__.py:145
+msgid "Sent kick signal to server."
+msgstr ""
+
+#: dashboard/__init__.py:165
+msgid "Choose a correct dimension."
+msgstr ""
+
+#: dashboard/__init__.py:169
+msgid "Enter a time."
+msgstr ""
+
+#: dashboard/__init__.py:184
+#, python-format
+msgid "Player banned for %s %s."
+msgstr ""
+
+#: dashboard/__init__.py:185
+msgid "Player banned permanently."
+msgstr ""
+
+#: dashboard/__init__.py:244
+msgid "Fill out all the fields!"
+msgstr ""
+
+#: dashboard/__init__.py:258
+msgid "Please enter a valid duration dimension."
+msgstr ""
+
+#: dashboard/__init__.py:267
+msgid "Automatic banning: Settings saved."
+msgstr ""
+
+#: dashboard/__init__.py:285
+#, python-format
+msgid "%s has been unbanned. Otherwise, the ban would've ended on %s."
+msgstr ""
+
+#: dashboard/__init__.py:287
+#, python-format
+msgid "%s has been unbanned. Otherwise, the ban would've never ended."
+msgstr ""
+
+#: dashboard/__init__.py:299
 msgid "Provide an operation mode."
-msgstr "Gib an, welche Operation Du durchführen möchtest."
+msgstr ""
 
-#: dashboard/__init__.py:292
+#: dashboard/__init__.py:301
 msgid "Provide a valid player name."
-msgstr "Gib einen gültigen Spielernamen an."
+msgstr ""
 
-#: dashboard/__init__.py:298
+#: dashboard/__init__.py:307
 msgid "Successfully sent editing request to server."
-msgstr "Bearbeitungsanfrage erfolgreich an den Server gesandt."
+msgstr ""
+
+#: dashboard/__init__.py:333
+msgid "Suspicious activity detected. Logging you out."
+msgstr ""
+
+#: dashboard/__init__.py:337
+msgid ""
+"The ban did expire the moment you were loading this page and is no longer"
+" up-to-date."
+msgstr ""
+
+#: dashboard/__init__.py:350
+msgid "Appeal approved. Player unbanned."
+msgstr ""
+
+#: dashboard/__init__.py:354
+msgid "Ban appeal successfully rejected."
+msgstr ""
+
+#: dashboard/__init__.py:371
+msgid "Message closed."
+msgstr ""
+
+#: player_support/__init__.py:27
+msgid "Invalid player name."
+msgstr ""
+
+#: player_support/__init__.py:38
+msgid ""
+"You did already appeal and you got rejected. You'll have to wait until "
+"your ban expires, then you are allowed to play again."
+msgstr ""
+
+#: player_support/__init__.py:40
+msgid ""
+"Sorry, but your former appeal already got rejected. Therefore, you won't "
+"be able to appeal anymore and your ban will stay permanent."
+msgstr ""
+
+#: player_support/__init__.py:45
+msgid "This player has nothing to appeal."
+msgstr ""
+
+#: player_support/__init__.py:56
+msgid "The appeal has been sent and will soon be processed by an administrator."
+msgstr ""
+
+#: player_support/__init__.py:75
+msgid "Player is banned."
+msgstr ""
+
+#: player_support/__init__.py:78
+#, python-format
+msgid "Ban expiry: %s"
+msgstr ""
+
+#: player_support/__init__.py:83
+#, python-format
+msgid "Ban appeal sent. Message: %s"
+msgstr ""
+
+#: player_support/__init__.py:87
+#, python-format
+msgid "Admin response to ban appeal: %s"
+msgstr ""
+
+#: player_support/__init__.py:91
+msgid "No admin response to any ban appeals yet."
+msgstr ""
+
+#: player_support/__init__.py:96
+#, python-format
+msgid "Player has warning(s): %s warnings given"
+msgstr ""
+
+#: player_support/__init__.py:101
+msgid "No significant information about this player."
+msgstr ""
+
+#: player_support/__init__.py:119
+msgid "We received your message."
+msgstr ""
+
+#: templates/base.html:48 templates/dashboard/home.html:15
+msgid "Kick"
+msgstr ""
+
+#: templates/base.html:51 templates/dashboard/home.html:23
+msgid "Ban"
+msgstr ""
+
+#: templates/base.html:54
+msgid "Warnings"
+msgstr ""
+
+#: templates/base.html:57
+msgid "Player support messages"
+msgstr ""
+
+#: templates/base.html:60 templates/dashboard/etc.html:7
+#: templates/dashboard/home.html:31
+msgid "Miscellaneous"
+msgstr ""
+
+#: templates/base.html:76
+msgid "logged in as"
+msgstr ""
+
+#: templates/base.html:76
+msgid "Log out"
+msgstr ""
+
+#: templates/auth/login.html:7
+msgid "Log in"
+msgstr ""
+
+#: templates/auth/login.html:10
+msgid "Please enter the administration credentials below to log in to Austeritas."
+msgstr ""
+
+#: templates/auth/login.html:20
+msgid "... or generate a new user"
+msgstr ""
+
+#: templates/auth/login.html:23
+msgid "Enter the wished credentials of the new user."
+msgstr ""
+
+#: templates/auth/login.html:29
+msgid "Generate JSON for new user"
+msgstr ""
+
+#: templates/dashboard/ban.html:8
+msgid "Ban a player"
+msgstr ""
+
+#: templates/dashboard/ban.html:12 templates/dashboard/kick.html:11
+msgid "By specific gamertag"
+msgstr ""
+
+#: templates/dashboard/ban.html:18 templates/dashboard/kick.html:16
+msgid "Add player name to list of known people"
+msgstr ""
+
+#: templates/dashboard/ban.html:28
+msgid "Banned players"
+msgstr ""
+
+#: templates/dashboard/ban.html:31
+msgid "Below, all players having a non-permanent ban are listed."
+msgstr ""
+
+#: templates/dashboard/ban.html:37
+msgid "Player"
+msgstr ""
+
+#: templates/dashboard/ban.html:40
+msgid "ban expires on"
+msgstr ""
+
+#: templates/dashboard/ban.html:43
+msgid "unban?"
+msgstr ""
+
+#: templates/dashboard/ban.html:59
+msgid "Unban"
+msgstr ""
+
+#: templates/dashboard/etc.html:13
+msgid "Automatic Banning"
+msgstr ""
+
+#: templates/dashboard/etc.html:15
+msgid ""
+"Automatically bans a player when the player exceeds a specific warning "
+"count."
+msgstr ""
+
+#: templates/dashboard/etc.html:21
+msgid "Ban players exceeding this limit"
+msgstr ""
+
+#: templates/dashboard/etc.html:25
+msgid "Reset warnings upon ban happened"
+msgstr ""
+
+#: templates/dashboard/etc.html:28
+msgid "Once limit reached, ban for..."
+msgstr ""
+
+#: templates/dashboard/etc.html:31
+msgid "Save settings"
+msgstr ""
 
 #: templates/dashboard/etc.html:36
 msgid "Edit allowlist"
-msgstr "Allowlist bearbeiten"
+msgstr ""
 
 #: templates/dashboard/etc.html:41
 msgid "Add player"
-msgstr "Spieler hinzufügen"
+msgstr ""
 
 #: templates/dashboard/etc.html:45
 msgid "Remove player"
-msgstr "Spieler entfernen"
+msgstr ""
+
+#: templates/dashboard/etc.html:54
+msgid "Edit list of known players"
+msgstr ""
+
+#: templates/dashboard/etc.html:78 templates/dashboard/kick.html:20
+#: templates/dashboard/warnings.html:40
+msgid "Add warning to player"
+msgstr ""
+
+#: templates/dashboard/etc.html:80
+msgid "Add player to list"
+msgstr ""
+
+#: templates/dashboard/home.html:7
+msgid "Dashboard - home"
+msgstr ""
+
+#: templates/dashboard/home.html:10 templates/player_support/main.html:10
+msgid "What do you want to do?"
+msgstr ""
+
+#: templates/dashboard/home.html:16
+msgid ""
+"Kicking a player from the server temporarily removes the person from the "
+"game, but it's possible to re-join immediately."
+msgstr ""
+
+#: templates/dashboard/home.html:24
+msgid ""
+"Banning a player removes the access to the server for a specific amount "
+"of time or even permanently. The player can join again after the ban "
+"expired or was appealed."
+msgstr ""
+
+#: templates/dashboard/home.html:32
+msgid "Set miscellaneous options for general server management."
+msgstr ""
+
+#: templates/dashboard/player_support.html:7
+msgid "Player support"
+msgstr ""
+
+#: templates/dashboard/player_support.html:13
+msgid "Ban appeals"
+msgstr ""
+
+#: templates/dashboard/player_support.html:29
+msgid "Reject"
+msgstr ""
+
+#: templates/dashboard/player_support.html:38
+msgid "Approve + unban"
+msgstr ""
+
+#: templates/dashboard/player_support.html:62
+msgid "Delete"
+msgstr ""
+
+#: templates/dashboard/warnings.html:7
+msgid "Warned players"
+msgstr ""
+
+#: templates/dashboard/components/list.html:2
+msgid "Paste in a name from the list of known players"
+msgstr ""
+
+#: templates/dashboard/components/list.html:8
+msgid "Edit list"
+msgstr ""
+
+#: templates/main/main.html:10
+msgid ""
+"This server is running the Austeritas remote moderation system for "
+"Bedrock Dedicated Servers (BDS)."
+msgstr ""
+
+#: templates/main/main.html:14
+msgid "Log in to continue"
+msgstr ""
+
+#: templates/main/main.html:20
+msgid "Player support platform"
+msgstr ""
+
+#: templates/player_support/appeal.html:7
+msgid "Report mistaken ban"
+msgstr ""
+
+#: templates/player_support/appeal.html:10
+msgid ""
+"In case you got banned and you think this is a mistake, you can appeal "
+"your ban below."
+msgstr ""
+
+#: templates/player_support/main.html:7
+msgid "Player support - home"
+msgstr ""
+
+#: templates/player_support/main.html:15
+msgid "Appeal a ban"
+msgstr ""
+
+#: templates/player_support/main.html:16
+msgid ""
+"If you got banned and think this is a mistake, you can report it here to "
+"get your ban reviewed."
+msgstr ""
+
+#: templates/player_support/main.html:23
+msgid "Read your player status"
+msgstr ""
+
+#: templates/player_support/main.html:24
+msgid ""
+"Here you can find out how many warnings you have and how long you are "
+"still banned."
+msgstr ""
+
+#: templates/player_support/main.html:31
+msgid "Send a mod-message"
+msgstr ""
+
+#: templates/player_support/main.html:32
+msgid ""
+"In the case you noticed something you need to tell a server moderator, "
+"you can write them a message here."
+msgstr ""
+
+#: templates/player_support/message.html:7
+msgid "Message a mod"
+msgstr ""
+
+#: templates/player_support/message.html:10
+msgid "Using this form, you can message a moderator about a specific topic."
+msgstr ""
+
+#: templates/player_support/status.html:7
+msgid "Read player status"
+msgstr ""
+
+#: templates/player_support/status.html:10
+msgid "Enter your name below to gather information about yourself on the server."
+msgstr ""

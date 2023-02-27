@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - player support
+{% endblock %}
+{% block content %}
+<h1 class="title is-1">
+    {{_("Player support")}}
+</h1>
+
+<div class="columns">
+    <div class="column">
+        <h2 class="subtitle">
+            {{_("Ban appeals")}}
+        </h2>
+
+        {% for player, message in appeals.items() %}
+        <div class="box p-3 my-2">
+            <strong>Player: {{player}}</strong><br>
+            <strong>Ban expiration: {{bans[player]}}</strong><br>
+            <p>
+                {{message}}
+            </p>
+            <div class="columns my-1">
+                <div class="column mx-2">
+                    <form action="{{url_for('dashboard.process_appeal')}}" method="post">
+                        <input type="hidden" name="player" value="{{player}}">
+                        <input type="hidden" name="decision" value="reject">
+                        <button class="button is-danger is-fullwidth">
+                            {{_("Reject")}}
+                        </button>
+                    </form>
+                </div>
+                <div class="column mx-2">
+                    <form action="{{url_for('dashboard.process_appeal')}}" method="post">
+                        <input type="hidden" name="player" value="{{player}}">
+                        <input type="hidden" name="decision" value="approve">
+                        <button class="button is-success is-fullwidth">
+                            {{_("Approve + unban")}}
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% if not appeals %}
+            <strong>There are no open appeals.</strong>
+        {% endif %}
+    </div>
+    <div class="column">
+        <h2 class="subtitle">
+            Mod messages
+        </h2>
+
+        {% for idx, message in messages.items() %}
+        <div class="box p-3 my-2">
+            <p>
+                {{message}}
+            </p>
+            <form action="{{url_for('dashboard.process_message')}}" method="post">
+                <input type="hidden" name="message" value="{{idx}}">
+                <button class="button is-warning">
+                    {{_("Delete")}}
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+        {% if not messages %}
+            <strong>There are no new messages.</strong>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

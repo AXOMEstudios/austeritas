@@ -313,4 +313,62 @@ def edit_whitelist():
 @dashboard.route("/player_support/")
 @login_required
 def player_support():
-    pass
+    _tmp = load_json(DATA_FILENAME)
+    appeals = _tmp["appeals"]
+    messages = {
+        idx: message for idx, message in enumerate(_tmp["messages"])
+    }
+    bans = {
+        player: (datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') if expiration != "permanent" else "permanent") for player, expiration in _tmp["bans"].items()
+    }
+    return render_template("dashboard/player_support.html", appeals = appeals, messages = messages, bans = bans)
+
+@dashboard.route("/player_support/process/appeal", methods = ["POST"])
+@login_required
+def process_appeal():
+    data = request.form
+    _tmp = load_json(DATA_FILENAME)
+
+    if (not data["decision"] in ["approve", "reject"]) or (not data["player"] in _tmp["appeals"].keys()):
+        flash(gettext("Suspicious activity detected. Logging you out."), "danger")
+        return redirect(url_for("auth.logout"))
+    
+    if not data["player"] in _tmp["bans"].keys():
+        flash(gettext("The ban did expire the moment you were loading this page and is no longer up-to-date."), "warning")
+        return redirect(url_for("auth.logout"))
+        
+    if not validate_player_name(data["player"]):
+        flash(gettext("Invalid input."))
+        return redirect(url_for("auth.logout"))
+
+    if data["decision"] == "approve":
+        execute_unban(data["player"])
+        del _tmp["appeals"][data["player"]]
+        del _tmp["bans"][data["player"]]
+        if data["player"] in _tmp["admin_responses"].keys():
+            del _tmp["admin_responses"][data["player"]]
+        flash(gettext("Appeal approved. Player unbanned."), "success")
+    else:
+        del _tmp["appeals"][data["player"]]
+        _tmp["admin_responses"][data["player"]] = "rejected"
+        flash(gettext("Ban appeal successfully rejected."), "danger")
+
+    write_json(_tmp, DATA_FILENAME)
+    
+    return redirect(url_for("dashboard.player_support"))
+
+@dashboard.route("/player_support/process/message", methods = ["POST"])
+@login_required
+def process_message():
+    data = request.form
+
+    _tmp = load_json(DATA_FILENAME)
+    _tmp["messages"].pop(
+        int(data["message"])
+    )
+    write_json(_tmp, DATA_FILENAME)
+    flash(
+        gettext("Message closed."), "success"
+    )
+
+    return redirect(url_for("dashboard.player_support"))

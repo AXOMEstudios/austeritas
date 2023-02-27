@@ -19,6 +19,11 @@ def clock_tick():
 
             for player in to_delete:
                 del _tmp["bans"][player]
+                if player in _tmp["appeals"].keys():
+                    del _tmp["appeals"][player]
+                if player in _tmp["admin_responses"].keys():
+                    del _tmp["admin_responses"][player]
+
         write_json(_tmp, DATA_FILENAME)
     except Exception as e:
         print("[AUSTERITAS CLOCK ERROR] %s" % str(e))

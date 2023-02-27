@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - mod messaging
+{% endblock %}
+{% block content %}
+<h1 class="title is-1">
+    {{_("Message a mod")}}
+</h1>
+<p>
+    {{_("Using this form, you can message a moderator about a specific topic.")}}
+</p>
+<hr>
+
+<form action="{{url_for('player_support.message')}}" method="post">
+    <label>
+        <strong>Your message:</strong>
+        <textarea name="message" rows="5" class="textarea" placeholder="describe what happened and why you think it needs more attention by the mods."></textarea>
+    </label>
+    <input type="submit" value="Send message" class="button is-success is-large my-3">
+</form>
+{% endblock content %}

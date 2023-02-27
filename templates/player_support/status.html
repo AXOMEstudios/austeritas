@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - player status
+{% endblock %}
+{% block content %}
+<h1 class="title is-1">
+    {{_("Read player status")}}
+</h1>
+<p>
+    {{_("Enter your name below to gather information about yourself on the server.")}}
+</p>
+<hr>
+
+<form action="{{url_for('player_support.status')}}" method="post">
+    <label>
+        <strong>Your in-game name: </strong>
+        <input type="text" name="player" class="input" placeholder="in-game player tag">
+    </label>
+    <input type="submit" value="Read" class="button is-success is-large my-3">
+
+    {% if status %}
+    <div class="box p-4">
+        <h1>Gathered information</h1>
+        <strong>
+            {% for property in status %}
+            <p>{{property}}</p>
+            {% endfor %}
+        </strong>
+    </div>
+    {% endif %}
+</form>
+{% endblock content %}

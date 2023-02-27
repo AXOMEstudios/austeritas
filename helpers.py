@@ -13,7 +13,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.user:
-            return redirect("/auth/")
+            return redirect("/auth/login")
         return f(*args, **kwargs)
     return decorated_function
 

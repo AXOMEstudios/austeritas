@@ -4,8 +4,21 @@ from constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
 from json import dump
 import uuid
 
-print("[WARNING] This will overwrite all Austeritas configuration files and therefore remove bans, mod messages, known players, registered admin credentials and much more. Are you sure you want to continue? (y/(n))")
-if input("(y/n) >> ") != "y": raise KeyboardInterrupt
+print('''[WARNING]
+This will overwrite all Austeritas configuration files and therefore remove:
+    - bans
+    - mod messages
+    - known players
+    - registered admin credentials
+    - autoban settings
+    - and other critical data
+    
+Are you sure you want to continue?''')
+if input("(y/n) >> ") != "y":
+    raise KeyboardInterrupt(
+        "Action cancelled."
+    )
+
 print("Writing files...")
 
 DATA_SKELETON = {
@@ -13,13 +26,12 @@ DATA_SKELETON = {
     "warnings": {},
     "bans": {},
     "appeals": {},
-    "messages": []
+    "messages": [],
+    "admin_responses": {}
 }
 
 CONFIG_SKELETON = {
-    "users": [
-        {"name": "default", "password": DUMMY_HASH}
-    ],
+    "users": [],
     "autoban_settings": {
         "do_autoban": "off",
         "reset_warns": "on",
