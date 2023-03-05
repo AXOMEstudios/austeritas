@@ -14,7 +14,7 @@ from flask_babel import Babel
 load_dotenv()
 init_clock()
 
-def create_app():
+def create_app(testing = False):
     app = Flask(__name__)
     babel = Babel(app, locale_selector = lambda: LANGUAGE)
 
@@ -23,6 +23,7 @@ def create_app():
     app.register_blueprint(dashboard)
     app.register_blueprint(player_support)
 
+    app.config["TESTING"]                   = testing
     app.config["TEMPLATES_AUTO_RELOAD"]     = DEBUG
     app.config["SECRET_KEY"]                = getenv("SECRET_KEY")
     app.config["SESSION_COOKIE_SECURE"]     = HAS_HTTPS

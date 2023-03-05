@@ -13,7 +13,7 @@ def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if not g.user:
-            return redirect("/auth/login")
+            return redirect("/auth/login"), 401
         return f(*args, **kwargs)
     return decorated_function
 
@@ -54,7 +54,7 @@ def load_json(filename=CONFIG_FILENAME):
 def validate_player_name(name):
     VALID_SYMBOLS = list(ascii_letters + digits + " " + "_")
 
-    if len(name) > 15 and len(name) < 3:
+    if len(name) > 15 or len(name) < 3:
         return False
 
     for letter in list(name):

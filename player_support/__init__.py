@@ -22,14 +22,14 @@ def home():
 def appeal():
     if request.method == "POST":
         data = request.form
-        if not validate_player_name(data["player"]):
+        if (not "player" in data.keys()) or (not validate_player_name(data["player"])):
             flash(
                 gettext("Invalid player name."), "danger"
             )
 
             return redirect(
                 url_for("player_support.appeal")
-            )
+            ), 400
         
         _tmp = load_json(DATA_FILENAME)
 
@@ -38,7 +38,7 @@ def appeal():
                 flash(gettext("You did already appeal and you got rejected. You'll have to wait until your ban expires, then you are allowed to play again."), "danger")
             else:
                 flash(gettext("Sorry, but your former appeal already got rejected. Therefore, you won't be able to appeal anymore and your ban will stay permanent."), "danger") 
-            return redirect(url_for("player_support.appeal"))
+            return redirect(url_for("player_support.appeal")), 403
 
         if not data["player"] in _tmp["bans"].keys():
             flash(
@@ -47,7 +47,7 @@ def appeal():
 
             return redirect(
                 url_for("player_support.appeal")
-            )
+            ), 400
 
         _tmp["appeals"][data["player"]] = data["reason"]
         write_json(_tmp, DATA_FILENAME)

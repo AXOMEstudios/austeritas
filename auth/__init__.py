@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for, session, g, request, flash
 import base64, bcrypt, hashlib
-from ..helpers import load_json
+from ..helpers import load_json, login_required
 from ..constants import DUMMY_HASH, ALLOW_NEW_USERS
 from json import dumps
 from flask_babel import gettext
@@ -43,14 +43,14 @@ def run_login():
             if check_password(data["password"], user["password"]):
                 session["user"] = user["name"]
                 g.user = user["name"]
-                return redirect(url_for("dashboard.home"))
+                return redirect(url_for("dashboard.home")), 200
             else:
                 flash(gettext("Incorrect username or password."), "danger")
-                return redirect(url_for("auth.login"))
+                return redirect(url_for("auth.login")), 403
     else:
         check_password(data["password"], DUMMY_HASH) # just there to mitigate enumeration attacks
         flash(gettext("Incorrect username or password."), "danger")
-        return redirect(url_for("auth.login"))
+        return redirect(url_for("auth.login")), 403
 
 @auth.route("/new", methods = ["POST"])
 def new_user():
@@ -60,7 +60,7 @@ def new_user():
         flash("Signup disabled.", "danger")
         return redirect(
             url_for("auth.login")
-        )
+        ), 403
 
     json = dumps({
         "name": data["name"],
@@ -72,6 +72,7 @@ def new_user():
     )
 
 @auth.route("/logout")
+@login_required
 def logout():
     del session["user"]
     g.user = ""
