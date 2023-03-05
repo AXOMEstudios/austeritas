@@ -2,22 +2,23 @@
 
 from constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
 from json import dump
-import uuid
+import uuid, sys
 
-print('''[WARNING]
-This will overwrite all Austeritas configuration files and therefore remove:
-    - bans
-    - mod messages
-    - known players
-    - registered admin credentials
-    - autoban settings
-    - and other critical data
-    
-Are you sure you want to continue?''')
-if input("(y/n) >> ") != "y":
-    raise KeyboardInterrupt(
-        "Action cancelled."
-    )
+if not (len(sys.argv) > 1 and sys.argv[1] == "confirm"):
+    print('''[WARNING]
+    This will overwrite all Austeritas configuration files and therefore remove:
+        - bans
+        - mod messages
+        - known players
+        - registered admin credentials
+        - autoban settings
+        - and other critical data
+        
+    Are you sure you want to continue?''')
+    if input("(y/n) >> ") != "y":
+        raise KeyboardInterrupt(
+            "Action cancelled."
+        )
 
 print("Writing files...")
 
