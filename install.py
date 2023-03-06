@@ -49,6 +49,6 @@ with open(CONFIG_FILENAME, "w") as f:
     dump(CONFIG_SKELETON, f, indent = 4)
 
 with open(".env", "w") as f:
-    f.write("SECRET_KEY=" + str(uuid.uuid4()))
+    f.write("SECRET_KEY=" + str(uuid.uuid4()) + "-" + str(uuid.uuid4()))
 
 print("Austeritas files have been written successfully.")
