@@ -7,21 +7,25 @@ from .player_support import player_support
 from .constants import DEBUG, HAS_HTTPS, LANGUAGE, MAX_CONTENT_SIZE
 
 from .internals.clock import init_clock
+from .internals.limiting import limiter
 from dotenv import load_dotenv
 from os import getenv
 from flask_babel import Babel
 
-load_dotenv()
-init_clock()
-
 def create_app(testing = False):
     app = Flask(__name__)
+
     babel = Babel(app, locale_selector = lambda: LANGUAGE)
+
+    load_dotenv()
+    init_clock()
 
     app.register_blueprint(main)
     app.register_blueprint(auth)
     app.register_blueprint(dashboard)
     app.register_blueprint(player_support)
+
+    limiter.init_app(app)
 
     app.config["TESTING"]                   = testing
     app.config["TEMPLATES_AUTO_RELOAD"]     = DEBUG

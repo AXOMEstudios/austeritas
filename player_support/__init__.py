@@ -1,15 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from ..constants import APPEAL_LIMIT, MESSAGE_LIMIT, DATA_FILENAME
 from ..helpers import load_json, write_json, validate_player_name
 from flask_babel import gettext
 from datetime import datetime
-
-from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
-
-limiter = Limiter(
-    key_func = get_remote_address
-)
+from ..internals.limiting import limiter
 
 player_support = Blueprint("player_support", __name__, url_prefix="/support")
 

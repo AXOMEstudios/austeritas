@@ -21,9 +21,9 @@ htmlcov/
 .coverage
 .coverage.*
 *,cover
+TODO
 
 austeritas_config.json
 austeritas_data.json
 translation-backups/**
-
-TODO
+.dbswap

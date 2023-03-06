@@ -2,7 +2,7 @@ import pytest
 from .. import create_app
 from ..helpers import write_json, load_json
 from ..constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
-import os
+import os, time
 
 SWAPPATH = ".dbswap"
 
@@ -11,10 +11,20 @@ DATA_SKELETON = {
         "player"
     ],
     "warnings": {},
-    "bans": {},
-    "appeals": {},
+    "bans": {
+        "BannedPlayer": time.time() + 10 * 60,
+        "Appeal1": time.time() + 10 * 60,
+        "Appeal2": time.time() + 10 * 60,
+        "Appeal3": "permanent"
+    },
+    "appeals": {
+        "Appeal1": "Message1",
+        "Appeal2": "Message2"
+    },
     "messages": [],
-    "admin_responses": {}
+    "admin_responses": {
+        "Appeal3": "rejected"
+    }
 }
 
 CONFIG_SKELETON = {

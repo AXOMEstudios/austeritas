@@ -355,7 +355,7 @@ def process_appeal():
 
     write_json(_tmp, DATA_FILENAME)
     
-    return redirect(url_for("dashboard.player_support"))
+    return redirect(url_for("dashboard.player_support")), 200
 
 @dashboard.route("/player_support/process/message", methods = ["POST"])
 @login_required
@@ -371,4 +371,4 @@ def process_message():
         gettext("Message closed."), "success"
     )
 
-    return redirect(url_for("dashboard.player_support"))
+    return redirect(url_for("dashboard.player_support")), 200
