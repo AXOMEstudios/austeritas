@@ -1,4 +1,4 @@
-from ..constants import ALLOW_NEW_USERS, DUMMY_HASH
+from ..constants import ALLOW_NEW_USERS
 from ..route_definitions import PUBLIC_ROUTES, UNPROTECTED_ROUTES
 from flask import url_for, session
 from . import login
