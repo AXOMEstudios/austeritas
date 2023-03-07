@@ -6,7 +6,8 @@ Austeritas is an amazingly easy-to-use server moderation system for Bedrock Dedi
 ---
 
 ### Getting started
-The installation of Austeritas isn't hard - simply follow this tutorial step by step and bam - there you go!
+The installation of Austeritas isn't hard - simply follow this tutorial step by step and bam - there you go:
+[**🚀 How to get started with Austeritas**](https://github.com/AXOMEstudios/austeritas/wiki/How-to-set-up-Austeritas)
 
 ## Features
 
