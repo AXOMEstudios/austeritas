@@ -26,4 +26,5 @@ TODO
 austeritas_config.json
 austeritas_data.json
 translation-backups/**
+translation-backups
 .dbswap

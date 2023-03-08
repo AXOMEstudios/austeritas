@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session, g, request, flash
 import base64, bcrypt, hashlib
-from ..helpers import load_json, login_required
-from ..constants import DUMMY_HASH, ALLOW_NEW_USERS
+from ...helpers import load_json, login_required
+from ...constants import DUMMY_HASH, ALLOW_NEW_USERS
 from json import dumps
 from flask_babel import gettext
 

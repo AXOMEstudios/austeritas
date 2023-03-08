@@ -1,9 +1,9 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
-from ..constants import APPEAL_LIMIT, MESSAGE_LIMIT, DATA_FILENAME
-from ..helpers import load_json, write_json, validate_player_name
+from ...constants import APPEAL_LIMIT, MESSAGE_LIMIT, DATA_FILENAME
+from ...helpers import load_json, write_json, validate_player_name
 from flask_babel import gettext
 from datetime import datetime
-from ..internals.limiting import limiter
+from ...internals.limiting import limiter
 
 player_support = Blueprint("player_support", __name__, url_prefix="/support")
 

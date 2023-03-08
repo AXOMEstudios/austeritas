@@ -1,9 +1,9 @@
 from flask import Flask
 
-from .auth import auth
-from .dashboard import dashboard
-from .main import main
-from .player_support import player_support
+from .sites.auth import auth
+from .sites.dashboard import dashboard
+from .sites.main import main
+from .sites.player_support import player_support
 from .constants import DEBUG, HAS_HTTPS, LANGUAGE, MAX_CONTENT_SIZE
 
 from .internals.clock import init_clock

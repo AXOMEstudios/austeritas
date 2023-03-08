@@ -1,7 +1,8 @@
 from flask import Blueprint, render_template, request, url_for, flash, redirect
-from ..helpers import login_required, load_json, write_json, validate_player_name
-from ..constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
-from ..internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban, whitelist_operation
+from ...helpers import login_required, load_json, write_json, validate_player_name
+from ...constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
+from ...internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban, whitelist_operation
+from ... import global_bans
 import time
 from datetime import datetime
 from flask_babel import gettext
@@ -17,7 +18,14 @@ DIMENSIONS_TRANSLATED = {
     "permanent": -1
 }
 
-def add_to_list_of_known_players(player):
+def check_for_global_ban(player):
+    if global_bans.is_banned(player):
+        execute_ban(player, "permanent")
+        flash("This player is globally known to be hacking, cheating or using unfair advantages. We banned the player.", "warning")
+
+def add_to_list_of_known_players(player, check = True):
+    if check: check_for_global_ban(player)
+
     _tmp = load_json(DATA_FILENAME)
     if not player in _tmp["known_players"]:
         _tmp["known_players"].append(player)
@@ -35,7 +43,8 @@ def remove_from_list_of_known_players(player):
     else:
         flash(gettext("Player not found on list."), "danger")
 
-def add_warning_to_player(player):
+def add_warning_to_player(player, check = True):
+    if check: check_for_global_ban(player)
     _tmp = load_json(DATA_FILENAME)
     autoban_settings = load_json(CONFIG_FILENAME)["autoban_settings"]
 
@@ -134,12 +143,14 @@ def run_kick():
         return redirect(
             url_for("dashboard.kick")
         )
+    
+    check_for_global_ban(data["player"])
 
     if "remember" in data.keys() and data["remember"] == "on":
-        add_to_list_of_known_players(data["player"])
+        add_to_list_of_known_players(data["player"], check=False)
 
     if "warn" in data.keys() and data["warn"] == "on":
-        add_warning_to_player(data["player"])
+        add_warning_to_player(data["player"], check=False)
 
     execute_kick(data["player"])
     flash(gettext("Sent kick signal to server."), "success")
@@ -158,8 +169,10 @@ def run_ban():
             url_for("dashboard.ban")
         )
 
+    check_for_global_ban(data["player"])
+
     if "remember" in data.keys() and data["remember"] == "on":
-        add_to_list_of_known_players(data["player"])
+        add_to_list_of_known_players(data["player"], check=False)
 
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
         flash(gettext("Choose a correct dimension."), "danger")
@@ -274,6 +287,7 @@ def auto_ban():
 @login_required
 def run_unban():
     data = request.form
+
     execute_unban(data["player"])
 
     _tmp = load_json(DATA_FILENAME)
@@ -286,6 +300,7 @@ def run_unban():
     else:
         flash(gettext("%s has been unbanned. Otherwise, the ban would've never ended.") % data["player"], "success")
 
+    check_for_global_ban(data["player"])
     return redirect(
         url_for("dashboard.ban")
     )
@@ -294,6 +309,7 @@ def run_unban():
 @login_required
 def edit_whitelist():
     data = request.form
+    check_for_global_ban(data["player"])
 
     if not "mode" in data.keys():
         flash(gettext("Provide an operation mode."), "danger")
