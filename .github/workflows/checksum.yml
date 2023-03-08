@@ -1,0 +1,12 @@
+name: Generate checksum for global_bans/banned.json
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Writing checksum to global_bans/list_checksum
+      run: |
+        md5sum global_bans/banned.json > global_bans/list_checksum
