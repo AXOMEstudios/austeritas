@@ -12,7 +12,7 @@ class c:
 WARNING_MESSAGE_CHAT = f'''{c.red}[Austeritas]{c.reset}: {c.warning}@%s has been warned. The player currently has {c.reset + c.bold}%s{c.reset + c.warning} warnings.'''
 
 KICK_MESSAGE = f'''{c.red}[Austeritas]{c.reset + c.bold + c.warning} 
-You have been kicked from %s. {c.reset + c.light_green}
+You have been kicked from %s. {c.reset + c.light_green} 
 [You are free to re-connect now]'''
 
 KICK_MESSAGE_CHAT = f'''{c.red}[Austeritas]{c.reset}: {c.warning}@%s has been kicked.'''
