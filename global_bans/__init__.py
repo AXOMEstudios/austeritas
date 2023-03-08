@@ -2,9 +2,7 @@ from requests import get
 from ..constants import UPDATE_URL
 from json import dump, load
 from os import path
-
-LIST_CHECKSUM_NAME  = "list_checksum"
-LIST_NAME           = "banned.json"
+from constants import LIST_NAME, LIST_CHECKSUM_NAME
 
 with open(path.join("global_bans", LIST_NAME), "r") as f:
     l = load(f)
