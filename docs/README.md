@@ -5,7 +5,7 @@
 Austeritas is an amazingly easy-to-use server moderation system for Bedrock Dedicated Servers (BDS) which allows you to remotely keep track of your moderation tasks by simply using the Austeritas online interface.
 
 
-It's, capable of banning, warning and kicking players, managing ban appeals and mod messages right from your browser. This makes moderation incredibly easy.
+It is capable of banning, warning and kicking players, managing ban appeals and mod messages right from your browser. This makes moderation incredibly easy.
 
 ---
 ## Getting started
