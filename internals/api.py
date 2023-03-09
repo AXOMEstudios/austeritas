@@ -1,10 +1,10 @@
 from ..helpers import load_json, write_json, validate_player_name
-from ..constants import DATA_FILENAME, SCREEN_PROCESS_NAME
+from ..constants import DATA_FILENAME, SCREEN_PROCESS_NAME, DEBUG
 from .messageconstructor import construct_ban_message, construct_ban_message_chat, construct_kick_message, construct_kick_message_chat, construct_warning_message_chat
 from subprocess import Popen
 from ..global_bans import check_for_update, run_update
 
-SKIP_COMMANDS = True # TODO: CHANGE before production to FALSE - otherwise, none of the actions will take effect.
+SKIP_COMMANDS = DEBUG
 
 def type_into_server_console(command):
     if SKIP_COMMANDS: return

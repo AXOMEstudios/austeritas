@@ -14,13 +14,15 @@ APPEAL_LIMIT                            = "20/hour"
 MESSAGE_LIMIT                           = "30/hour"
 MAX_CONTENT_SIZE                        = 10 * 1024                                                         # 10 KB
 
+# When running Austeritas on a server, set this to False!
+DEBUG                                   = True
+
 #
 # ### ADVANCED SETTINGS ###
 # 
 # Don't touch those unless you know what you are doing as these can easily break Austeritas' functionality.
 
 # SERVER DEVELOPMENT
-DEBUG                                   = False
 HAS_HTTPS                               = False
 
 # FILENAMES

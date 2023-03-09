@@ -18,7 +18,7 @@ def create_app(testing = False):
     babel = Babel(app, locale_selector = lambda: LANGUAGE)
 
     load_dotenv()
-    init_clock()
+    init_clock(testing)
 
     app.register_blueprint(main)
     app.register_blueprint(auth)
