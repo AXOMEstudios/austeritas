@@ -5,6 +5,7 @@ from subprocess import Popen
 from ..global_bans import check_for_update, run_update
 import sys
 
+SKIP_COMMANDS = False
 if "pytest" in sys.modules or DEBUG:
     SKIP_COMMANDS = True
 
