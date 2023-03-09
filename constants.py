@@ -15,7 +15,7 @@ MESSAGE_LIMIT                           = "30/hour"
 MAX_CONTENT_SIZE                        = 10 * 1024                                                         # 10 KB
 
 # When running Austeritas on a server, set this to False!
-DEBUG                                   = True
+DEBUG                                   = False
 
 #
 # ### ADVANCED SETTINGS ###

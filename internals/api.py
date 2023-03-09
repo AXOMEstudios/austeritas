@@ -3,8 +3,10 @@ from ..constants import DATA_FILENAME, SCREEN_PROCESS_NAME, DEBUG
 from .messageconstructor import construct_ban_message, construct_ban_message_chat, construct_kick_message, construct_kick_message_chat, construct_warning_message_chat
 from subprocess import Popen
 from ..global_bans import check_for_update, run_update
+import sys
 
-SKIP_COMMANDS = DEBUG
+if "pytest" in sys.modules or DEBUG:
+    SKIP_COMMANDS = True
 
 def type_into_server_console(command):
     if SKIP_COMMANDS: return
