@@ -2,6 +2,7 @@ import sched, threading, time
 from ..constants import CLOCK_INTERVAL, DATA_FILENAME
 from ..helpers import load_json, write_json
 from .api import execute_unban
+from .api import banlist_update_tick
 
 s = sched.scheduler()
 
@@ -30,6 +31,7 @@ def clock_tick():
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
 
 def start_clock():
+    banlist_update_tick()
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
     s.run()
 
