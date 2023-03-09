@@ -31,7 +31,7 @@ def clock_tick():
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
 
 def start_clock():
-    banlist_update_tick()
+    # banlist_update_tick()
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
     s.run()
 
