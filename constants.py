@@ -6,8 +6,8 @@
 SERVER_NAME                             = "UwU-Server"
 SCREEN_PROCESS_NAME                     = "bedrock-server"
 LANGUAGE                                = "de"                                                              # supported: en, de
-ALLOW_NEW_USERS                         = False                                                             # recommended: False
-CLOCK_INTERVAL                          = 10 * 60                                                           # recommended: 600s
+ALLOW_NEW_USERS                         = True                                                             # recommended: False
+CLOCK_INTERVAL                          = 10                                                           # recommended: 600s
 
 # LIMITS
 APPEAL_LIMIT                            = "20/hour"
