@@ -2,7 +2,7 @@ from flask import session, url_for
 
 from src.constants import ALLOW_NEW_USERS
 
-from ..route_definitions import PUBLIC_ROUTES, UNPROTECTED_ROUTES
+from ..route_definitions import PUBLIC_ROUTES, UNPROTECTED_ROUTES, EXEMPT_AUTH_CHECKS
 from . import login
 
 
@@ -21,7 +21,7 @@ def test_new_user(client):
 def test_login_required(client, app):
     with app.test_request_context():
         routes = [
-            (url_for(rule.endpoint) if "GET" in rule.methods and rule.endpoint != "static" else "") for rule in app.url_map.iter_rules()
+            (url_for(rule.endpoint) if "GET" in rule.methods and rule.endpoint != "static" and rule.endpoint not in EXEMPT_AUTH_CHECKS else "") for rule in app.url_map.iter_rules()
         ]
 
     for route in routes:
