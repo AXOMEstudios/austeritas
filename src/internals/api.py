@@ -77,6 +77,16 @@ def send_chat_warning(player, warnings):
     )
 
 
+def send_private_message(player, text):
+    if not validate_player_name(player):
+        return
+
+    print("tellraw %s %s" % (player, text))
+    type_into_server_console(
+        "tellraw %s %s" % (player, text)
+    )
+
+
 def whitelist_operation(player, mode="add"):
     if not mode in ["add", "remove"]:
         return

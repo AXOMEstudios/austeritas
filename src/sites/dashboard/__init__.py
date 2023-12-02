@@ -1,13 +1,24 @@
-from flask import Blueprint, render_template, request, url_for, flash, redirect
-from ...helpers import login_required, load_json, write_json, validate_player_name
-from ...constants import DATA_FILENAME, CONFIG_FILENAME, CLOCK_INTERVAL
-from ...internals.api import execute_kick, execute_ban, send_chat_warning, execute_unban, whitelist_operation
-from ... import global_bans
+import json
+from multiprocessing import Process
+import random
+from threading import Thread
 import time
 from datetime import datetime
+
+from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_babel import gettext
 
+from ... import global_bans
+from ...constants import AUSTERITAS_HOST, CLOCK_INTERVAL, CONFIG_FILENAME, DATA_FILENAME, HAS_HTTPS
+from ...helpers import (load_json, login_required, validate_player_name,
+                        write_json)
+from ...internals.api import (execute_ban, execute_kick, execute_unban,
+                              send_chat_warning, send_private_message,
+                              whitelist_operation)
+
 dashboard = Blueprint("dashboard", __name__, url_prefix="/dashboard")
+
+pending_checks = {}
 
 DIMENSIONS_TRANSLATED = {
     "minutes": 60,
@@ -419,3 +430,71 @@ def process_message():
     )
 
     return redirect(url_for("dashboard.player_support")), 200
+
+
+@dashboard.route("/macro-check")
+@login_required
+def macro_checking():
+    known = load_json(DATA_FILENAME)["known_players"]
+    return render_template("dashboard/macro_checking.html", list_of_players=known)
+
+
+def kick_after_no_reaction(player):
+    time.sleep(90)
+    execute_kick(player)
+
+
+@dashboard.route("/macro-check/run", methods=["POST"])
+@login_required
+def run_macro_check():
+    data = request.form
+    id_ = random.randint(1000, 9999)
+
+    t = Process(target=kick_after_no_reaction, args=(data["player"], ))
+    t.start()
+
+    pending_checks[id_] = (data["player"], t.terminate, time.time())
+
+    send_private_message(data["player"],
+                         json.dumps({
+                             "text": "[Austeritas] !!! IMMEDIATE ATTENTION REQUIRED: You are being macro checked.\
+ Please open the following URL to resolve the check: %s   !!!" % ("https" if HAS_HTTPS else "http" + "://" + AUSTERITAS_HOST + "/dashboard/rmc/" + str(id_)),
+                            "color": "red",
+                            "bold": True
+                        }))
+
+    flash(gettext("Macro check sent."), "success")
+
+    return redirect(url_for("dashboard.macro_checking"))
+
+
+@dashboard.route("/rmc/<int:id_>")
+def resolve_macro_check(id_: int):
+    if not id_ in pending_checks:
+        return render_template(
+            "dashboard/resolve_check.html",
+            message="Invalid URL.",
+            status="danger",
+            player="?"
+        )
+
+    player = pending_checks[id_][0]
+
+    if (time.time() - pending_checks[id_][2]) > 90:
+        del pending_checks[id_]
+        return render_template(
+            "dashboard/resolve_check.html",
+            message="Expired URL.",
+            status="danger",
+            player=player
+        )
+
+    pending_checks[id_][1]()
+    del pending_checks[id_]
+
+    return render_template(
+        "dashboard/resolve_check.html",
+        player=player,
+        status="success",
+        message="Resolved. Thanks for your time."
+    )

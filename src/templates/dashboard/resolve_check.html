@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - resolve macro check
+{% endblock %}
+{% block content %}
+<section class="section">
+    <h1 class="title is-1 has-text-{{status}}">
+        {{message}}
+    </h1>
+    <hr>
+    <p>
+        Player: {{player}}
+    </p>
+</section>
+{% endblock content %}

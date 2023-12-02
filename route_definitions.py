@@ -4,9 +4,13 @@ PUBLIC_ROUTES = [
     "/support/",
     "/support/message",
     "/support/appeal",
-    "/support/status"
+    "/support/status",
 ]
 
 UNPROTECTED_ROUTES = [
     "/static/"
+]
+
+EXEMPT_AUTH_CHECKS = [
+    "dashboard.resolve_macro_check"
 ]
