@@ -1,8 +1,11 @@
+import os
+import time
+
 import pytest
+
 from .. import create_app
-from ..helpers import write_json, load_json
-from ..constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
-import os, time
+from ..src.constants import CONFIG_FILENAME, DATA_FILENAME, DUMMY_HASH
+from ..src.helpers import load_json, write_json
 
 SWAPPATH = ".dbswap"
 

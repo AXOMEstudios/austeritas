@@ -1,9 +1,12 @@
-import sched, threading, time
+import sched
+import threading
+import time
 from ..constants import CLOCK_INTERVAL, DATA_FILENAME
 from ..helpers import load_json, write_json
 from .api import execute_unban, banlist_update_tick
 
 s = sched.scheduler()
+
 
 def clock_tick():
     try:
@@ -29,12 +32,14 @@ def clock_tick():
         print("[AUSTERITAS CLOCK ERROR] %s" % str(e))
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
 
-def start_clock(testing = False):
+
+def start_clock(testing=False):
     if not testing:
         banlist_update_tick()
     s.enter(CLOCK_INTERVAL, 1, clock_tick)
     s.run()
 
-def init_clock(testing = False):
-    t = threading.Thread(target = start_clock, daemon = True, args = [testing])
+
+def init_clock(testing=False):
+    t = threading.Thread(target=start_clock, daemon=True, args=[testing])
     t.start()

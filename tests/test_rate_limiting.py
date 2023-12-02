@@ -1,4 +1,5 @@
-from ..constants import MESSAGE_LIMIT, MAX_CONTENT_SIZE
+from src.constants import MAX_CONTENT_SIZE, MESSAGE_LIMIT
+
 
 def test_too_large_request_entity(client):
     response = client.post("/support/message", data = {

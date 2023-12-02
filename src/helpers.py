@@ -60,5 +60,8 @@ def validate_player_name(name):
     for letter in list(name):
         if not letter in VALID_SYMBOLS:
             return False
+        
+    if name[0] in list(digits):
+        return False
     
     return True

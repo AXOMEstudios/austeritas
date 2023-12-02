@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, session, g, request, flash
-import base64, bcrypt, hashlib
+import base64
+import bcrypt
+import hashlib
 from ...helpers import load_json, login_required
 from ...constants import DUMMY_HASH, ALLOW_NEW_USERS
 from json import dumps
@@ -7,12 +9,14 @@ from flask_babel import gettext
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
+
 @auth.before_app_request
 def before_main_request():
     if "user" in session.keys():
         g.user = session["user"]
     else:
         g.user = ""
+
 
 def generate_password_hash(password):
     password = password.encode("utf-8")
@@ -23,17 +27,20 @@ def generate_password_hash(password):
     ).decode()
     return hashed
 
+
 def check_password(password, hash):
     password = password.encode("utf-8")
     password = base64.b64encode(hashlib.sha256(password).digest())
     hash = hash.encode("utf-8")
     return bcrypt.checkpw(password, hash)
 
+
 @auth.route("/login")
 def login():
     return render_template("/auth/login.html")
 
-@auth.route("/login/submit", methods = ["POST"])
+
+@auth.route("/login/submit", methods=["POST"])
 def run_login():
     data = request.form
     users = load_json()["users"]
@@ -48,11 +55,13 @@ def run_login():
                 flash(gettext("Incorrect username or password."), "danger")
                 return redirect(url_for("auth.login")), 403
     else:
-        check_password(data["password"], DUMMY_HASH) # just there to mitigate enumeration attacks
+        # just there to mitigate enumeration attacks
+        check_password(data["password"], DUMMY_HASH)
         flash(gettext("Incorrect username or password."), "danger")
         return redirect(url_for("auth.login")), 403
 
-@auth.route("/new", methods = ["POST"])
+
+@auth.route("/new", methods=["POST"])
 def new_user():
     data = request.form
 
@@ -70,6 +79,7 @@ def new_user():
     return redirect(
         url_for("auth.login")
     )
+
 
 @auth.route("/logout")
 @login_required
