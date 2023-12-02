@@ -14,6 +14,8 @@ APPEAL_LIMIT                            = "20/hour"
 MESSAGE_LIMIT                           = "30/hour"
 MAX_CONTENT_SIZE                        = 10 * 1024                                                         # 10 KB
 
+AUSTERITAS_HOST = "0.0.0.0:9002"
+
 # When running Austeritas on a server, set this to False!
 DEBUG                                   = True
 
@@ -31,4 +33,4 @@ DATA_FILENAME                           = "austeritas_data.json"
 
 # MISCELLANEOUS
 DUMMY_HASH                              = "$2b$12$s3YEAcxEsggkbib5uAvfiueIdBho7HfZpgh8OH96qiGUgp5AjB3Lq"    # this is the hash of an empty string ("")
-UPDATE_URL                              = "https://raw.githubusercontent.com/AXOMEstudios/austeritas/master/global_bans/"   # used to fetch global ban list updates from GitHub.
+UPDATE_URL                              = "https://raw.githubusercontent.com/AXOMEstudios/austeritas/master/src/global_bans/"   # used to fetch global ban list updates from GitHub.

@@ -45,4 +45,4 @@ def create_app(testing=False):
 
 
 if __name__ == "__main__":
-    serve(create_app(), port=9002)
+    serve(create_app(), port=9002, threads=1)

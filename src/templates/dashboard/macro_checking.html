@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+    Austeritas - macro checking
+{% endblock %}
+
+{% block content %}
+
+<h1 class="title is-1">
+    {{_("Macro Checking")}}
+</h1><hr>
+<div class="columns">
+    <div class="column">
+        <h2 class="subtitle">{{_("By specific gamertag")}}</h2>
+        <form action="{{url_for('dashboard.run_macro_check')}}" method="post">
+            <input class="input my-1" type="text" placeholder="gamertag" name="player" id="gamertag">
+            <input class="button is-danger my-1 is-fullwidth" value="Check" type="submit">
+        </form>
+    </div>
+
+    {% include "/dashboard/components/list.html" %}
+</div>
+
+{% endblock content %}
