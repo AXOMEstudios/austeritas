@@ -1,6 +1,8 @@
-from ..helpers import load_json
-from ..constants import DATA_FILENAME
+from src.constants import DATA_FILENAME
+from src.helpers import load_json
+
 from . import login
+
 
 def test_no_input(client):
     response = client.post("/support/appeal", data = {})
@@ -75,3 +77,4 @@ def test_suspicious_decision(client):
         })
 
         assert response.status_code == 302
+        

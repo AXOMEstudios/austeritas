@@ -18,13 +18,16 @@ DIMENSIONS_TRANSLATED = {
     "permanent": -1
 }
 
+
 def check_for_global_ban(player):
     if global_bans.is_banned(player):
         execute_ban(player, "permanent")
         flash("This player is globally known to be hacking, cheating or using unfair advantages. We banned the player.", "warning")
 
-def add_to_list_of_known_players(player, check = True):
-    if check: check_for_global_ban(player)
+
+def add_to_list_of_known_players(player, check=True):
+    if check:
+        check_for_global_ban(player)
 
     _tmp = load_json(DATA_FILENAME)
     if not player in _tmp["known_players"]:
@@ -33,6 +36,7 @@ def add_to_list_of_known_players(player, check = True):
         flash(gettext("Added player to list of known players."), "success")
     else:
         flash(gettext("Player already on list."), "danger")
+
 
 def remove_from_list_of_known_players(player):
     _tmp = load_json(DATA_FILENAME)
@@ -43,8 +47,10 @@ def remove_from_list_of_known_players(player):
     else:
         flash(gettext("Player not found on list."), "danger")
 
-def add_warning_to_player(player, check = True):
-    if check: check_for_global_ban(player)
+
+def add_warning_to_player(player, check=True):
+    if check:
+        check_for_global_ban(player)
     _tmp = load_json(DATA_FILENAME)
     autoban_settings = load_json(CONFIG_FILENAME)["autoban_settings"]
 
@@ -62,12 +68,15 @@ def add_warning_to_player(player, check = True):
                 autoban_settings["duration-dimension"]
             ]
             ban_end_timestamp = round(time.time()) + duration_in_seconds
-    
-            execute_ban(player, (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
+
+            execute_ban(
+                player, (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
             flash(gettext("Automatic banning: %s banned (%s%s) for exceeding warning limit of %s warnings.") % (
                 player,
-                (autoban_settings["duration"] if not autoban_settings["duration-dimension"] == "permanent" else ""),
-                (" " if not autoban_settings["duration-dimension"] == "permanent" else "") + autoban_settings["duration-dimension"],
+                (autoban_settings["duration"]
+                 if not autoban_settings["duration-dimension"] == "permanent" else ""),
+                (" " if not autoban_settings["duration-dimension"] ==
+                 "permanent" else "") + autoban_settings["duration-dimension"],
                 autoban_settings["max_warnings"]
             ), "warning")
 
@@ -75,7 +84,8 @@ def add_warning_to_player(player, check = True):
                 _tmp = load_json(DATA_FILENAME)
                 del _tmp["warnings"][player]
                 write_json(_tmp, DATA_FILENAME)
-                flash(gettext("Automatic banning: Removed all warnings from %s due to policy.") % player, "warning")
+                flash(gettext(
+                    "Automatic banning: Removed all warnings from %s due to policy.") % player, "warning")
 
 
 def remove_warning_from_player(player):
@@ -92,16 +102,19 @@ def remove_warning_from_player(player):
     write_json(_tmp, DATA_FILENAME)
     flash(gettext("Removed one warning from %s.") % player, "success")
 
+
 @dashboard.route("/")
 @login_required
 def home():
     return render_template("dashboard/home.html")
 
+
 @dashboard.route("/kick")
 @login_required
 def kick():
     known = load_json(DATA_FILENAME)["known_players"]
-    return render_template("dashboard/kick.html", list_of_players = known)
+    return render_template("dashboard/kick.html", list_of_players=known)
+
 
 @dashboard.route("/ban")
 @login_required
@@ -111,7 +124,8 @@ def ban():
     banned_players = {
         player: (datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') if expiration != "permanent" else "permanent") for player, expiration in banned_players.items()
     }
-    return render_template("dashboard/ban.html", list_of_players = known, banned_players = banned_players, clock_rate = round(CLOCK_INTERVAL / 60))
+    return render_template("dashboard/ban.html", list_of_players=known, banned_players=banned_players, clock_rate=round(CLOCK_INTERVAL / 60))
+
 
 @dashboard.route("/warnings")
 @login_required
@@ -119,16 +133,18 @@ def warnings():
     _tmp = load_json(DATA_FILENAME)
     warnings = _tmp["warnings"]
     known = _tmp["known_players"]
-    return render_template("dashboard/warnings.html", warnings = warnings, list_of_players = known)
+    return render_template("dashboard/warnings.html", warnings=warnings, list_of_players=known)
+
 
 @dashboard.route("/etc")
 @login_required
 def etc():
     known = load_json(DATA_FILENAME)["known_players"]
     autoban_settings = load_json(CONFIG_FILENAME)["autoban_settings"]
-    return render_template("dashboard/etc.html", list_of_players = known, clock_rate = round(CLOCK_INTERVAL / 60), abs = autoban_settings)
+    return render_template("dashboard/etc.html", list_of_players=known, clock_rate=round(CLOCK_INTERVAL / 60), abs=autoban_settings)
 
-@dashboard.route("/kick/run", methods = ["POST"])
+
+@dashboard.route("/kick/run", methods=["POST"])
 @login_required
 def run_kick():
     data = request.form
@@ -143,7 +159,7 @@ def run_kick():
         return redirect(
             url_for("dashboard.kick")
         )
-    
+
     check_for_global_ban(data["player"])
 
     if "remember" in data.keys() and data["remember"] == "on":
@@ -159,7 +175,8 @@ def run_kick():
         url_for("dashboard.kick")
     )
 
-@dashboard.route("/ban/run", methods = ["POST"])
+
+@dashboard.route("/ban/run", methods=["POST"])
 @login_required
 def run_ban():
     data = request.form
@@ -177,11 +194,11 @@ def run_ban():
     if not data["duration-dimension"] in DIMENSIONS_TRANSLATED.keys():
         flash(gettext("Choose a correct dimension."), "danger")
         return redirect(url_for("dashboard.ban"))
-    
+
     if data["duration-dimension"] != "permanent" and (not data["duration"]):
         flash(gettext("Enter a time."), "danger")
         return redirect(url_for("dashboard.ban"))
-    
+
     res_duration = 0
     if data["duration-dimension"] == "permanent":
         res_duration = 1
@@ -192,16 +209,18 @@ def run_ban():
         data["duration-dimension"]
     ]
     ban_end_timestamp = round(time.time()) + duration_in_seconds
-    
-    execute_ban(data["player"], (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
+
+    execute_ban(
+        data["player"], (ban_end_timestamp if duration_in_seconds > 0 else "permanent"))
     flash(gettext("Player banned for %s %s.") % (data["duration"], data["duration-dimension"])
           if data["duration-dimension"] != "permanent" else gettext("Player banned permanently."), "success")
-    
+
     return redirect(
         url_for("dashboard.ban")
     )
 
-@dashboard.route("/list/remove", methods = ["POST"])
+
+@dashboard.route("/list/remove", methods=["POST"])
 @login_required
 def remove_from_list():
     data = request.form
@@ -212,7 +231,8 @@ def remove_from_list():
         url_for("dashboard.etc")
     )
 
-@dashboard.route("/list/add", methods = ["POST"])
+
+@dashboard.route("/list/add", methods=["POST"])
 @login_required
 def add_to_list():
     data = request.form
@@ -226,7 +246,8 @@ def add_to_list():
         url_for("dashboard.etc")
     )
 
-@dashboard.route("/warnings/add", methods = ["POST"])
+
+@dashboard.route("/warnings/add", methods=["POST"])
 @login_required
 def add_warn_route():
     data = request.form
@@ -237,7 +258,8 @@ def add_warn_route():
         url_for("dashboard.warnings")
     )
 
-@dashboard.route("/warnings/remove", methods = ["POST"])
+
+@dashboard.route("/warnings/remove", methods=["POST"])
 @login_required
 def remove_warn_route():
     data = request.form
@@ -248,7 +270,8 @@ def remove_warn_route():
         url_for("dashboard.warnings")
     )
 
-@dashboard.route("/etc/autoban", methods = ["POST"])
+
+@dashboard.route("/etc/autoban", methods=["POST"])
 @login_required
 def auto_ban():
     data = request.form
@@ -283,7 +306,8 @@ def auto_ban():
         url_for("dashboard.etc")
     )
 
-@dashboard.route("/ban/unban", methods = ["POST"])
+
+@dashboard.route("/ban/unban", methods=["POST"])
 @login_required
 def run_unban():
     data = request.form
@@ -294,18 +318,21 @@ def run_unban():
     expiration = _tmp["bans"][data["player"]]
     del _tmp["bans"][data["player"]]
     write_json(_tmp, DATA_FILENAME)
-    
+
     if expiration != "permanent":
-        flash(gettext("%s has been unbanned. Otherwise, the ban would've ended on %s.") % (data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
+        flash(gettext("%s has been unbanned. Otherwise, the ban would've ended on %s.") % (
+            data["player"], datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC')), "success")
     else:
-        flash(gettext("%s has been unbanned. Otherwise, the ban would've never ended.") % data["player"], "success")
+        flash(gettext("%s has been unbanned. Otherwise, the ban would've never ended.") %
+              data["player"], "success")
 
     check_for_global_ban(data["player"])
     return redirect(
         url_for("dashboard.ban")
     )
 
-@dashboard.route("/etc/edit_whitelist", methods = ["POST"])
+
+@dashboard.route("/etc/edit_whitelist", methods=["POST"])
 @login_required
 def edit_whitelist():
     data = request.form
@@ -326,6 +353,7 @@ def edit_whitelist():
         url_for("dashboard.etc")
     )
 
+
 @dashboard.route("/player_support/")
 @login_required
 def player_support():
@@ -337,9 +365,10 @@ def player_support():
     bans = {
         player: (datetime.utcfromtimestamp(expiration).strftime('%d.%m.%Y %H:%M:%S UTC') if expiration != "permanent" else "permanent") for player, expiration in _tmp["bans"].items()
     }
-    return render_template("dashboard/player_support.html", appeals = appeals, messages = messages, bans = bans)
+    return render_template("dashboard/player_support.html", appeals=appeals, messages=messages, bans=bans)
 
-@dashboard.route("/player_support/process/appeal", methods = ["POST"])
+
+@dashboard.route("/player_support/process/appeal", methods=["POST"])
 @login_required
 def process_appeal():
     data = request.form
@@ -348,11 +377,12 @@ def process_appeal():
     if (not data["decision"] in ["approve", "reject"]) or (not data["player"] in _tmp["appeals"].keys()):
         flash(gettext("Suspicious activity detected. Logging you out."), "danger")
         return redirect(url_for("auth.logout"))
-    
+
     if not data["player"] in _tmp["bans"].keys():
-        flash(gettext("The ban did expire the moment you were loading this page and is no longer up-to-date."), "warning")
+        flash(gettext(
+            "The ban did expire the moment you were loading this page and is no longer up-to-date."), "warning")
         return redirect(url_for("auth.logout"))
-        
+
     if not validate_player_name(data["player"]):
         flash(gettext("Invalid input."))
         return redirect(url_for("auth.logout"))
@@ -370,10 +400,11 @@ def process_appeal():
         flash(gettext("Ban appeal successfully rejected."), "danger")
 
     write_json(_tmp, DATA_FILENAME)
-    
+
     return redirect(url_for("dashboard.player_support")), 200
 
-@dashboard.route("/player_support/process/message", methods = ["POST"])
+
+@dashboard.route("/player_support/process/message", methods=["POST"])
 @login_required
 def process_message():
     data = request.form

@@ -2,7 +2,8 @@
 
 from constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
 from json import dump
-import uuid, sys
+import uuid
+import sys
 
 if not (len(sys.argv) > 1 and sys.argv[1] == "confirm"):
     print('''[WARNING]
@@ -43,10 +44,10 @@ CONFIG_SKELETON = {
 }
 
 with open(DATA_FILENAME, "w") as f:
-    dump(DATA_SKELETON, f, indent = 4)
+    dump(DATA_SKELETON, f, indent=4)
 
 with open(CONFIG_FILENAME, "w") as f:
-    dump(CONFIG_SKELETON, f, indent = 4)
+    dump(CONFIG_SKELETON, f, indent=4)
 
 with open(".env", "w") as f:
     f.write("SECRET_KEY=" + str(uuid.uuid4()) + "-" + str(uuid.uuid4()))

@@ -1,4 +1,5 @@
-from ..helpers import validate_player_name
+from src.helpers import validate_player_name
+
 
 def test_malicious_input():
     MALICIOUS = [
@@ -46,3 +47,4 @@ def test_correct_input():
     ]
     for inp in VALID:
         assert validate_player_name(inp)
+        

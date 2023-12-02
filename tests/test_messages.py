@@ -1,6 +1,7 @@
-from ..helpers import load_json
-from ..constants import DATA_FILENAME
+from src.constants import DATA_FILENAME
+from src.helpers import load_json
 from . import login
+
 
 def _verify_no_entry_in_db(message):
     return (not message in load_json(DATA_FILENAME)["messages"])
@@ -50,3 +51,4 @@ def test_remove_message(client):
 
         assert response.status_code == 200
         assert _verify_no_entry_in_db(_str)
+        

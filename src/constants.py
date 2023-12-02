@@ -6,7 +6,7 @@
 SERVER_NAME                             = "UwU-Server"
 SCREEN_PROCESS_NAME                     = "bedrock-server"
 LANGUAGE                                = "de"                                                              # supported: en, de
-ALLOW_NEW_USERS                         = False                                                             # recommended: False
+ALLOW_NEW_USERS                         = True                                                              # recommended: False
 CLOCK_INTERVAL                          = 10 * 60                                                           # recommended: 600s
 
 # LIMITS
@@ -15,7 +15,7 @@ MESSAGE_LIMIT                           = "30/hour"
 MAX_CONTENT_SIZE                        = 10 * 1024                                                         # 10 KB
 
 # When running Austeritas on a server, set this to False!
-DEBUG                                   = False
+DEBUG                                   = True
 
 #
 # ### ADVANCED SETTINGS ###

@@ -1,6 +1,7 @@
 from hashlib import sha1
 from os import path
-from constants import LIST_NAME, LIST_CHECKSUM_NAME
+
+from constants import LIST_CHECKSUM_NAME, LIST_NAME
 
 with open(path.join("global_bans", LIST_NAME), "r") as f:
     d = f.read()
