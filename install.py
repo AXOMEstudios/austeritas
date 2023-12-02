@@ -1,9 +1,10 @@
 # This script runs some steps in order to install Austeritas for the first use.
 
-from constants import DATA_FILENAME, CONFIG_FILENAME, DUMMY_HASH
-from json import dump
-import uuid
 import sys
+import uuid
+from json import dump
+
+from src.constants import CONFIG_FILENAME, DATA_FILENAME, DUMMY_HASH
 
 if not (len(sys.argv) > 1 and sys.argv[1] == "confirm"):
     print('''[WARNING]
