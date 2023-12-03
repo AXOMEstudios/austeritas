@@ -1,7 +1,5 @@
 from datetime import datetime
 
-from flask_babel import gettext
-
 from ..constants import SERVER_NAME
 
 
