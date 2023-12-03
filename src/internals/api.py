@@ -52,7 +52,6 @@ def execute_ban(player, duration="permanent"):
     ]
 
     for command in commands_to_execute:
-        print(command)
         type_into_server_console(command)
 
     _tmp = load_json(DATA_FILENAME)
