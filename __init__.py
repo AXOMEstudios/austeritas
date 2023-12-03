@@ -12,6 +12,7 @@ from src.sites.auth import auth
 from src.sites.dashboard import dashboard
 from src.sites.main import main
 from src.sites.player_support import player_support
+from src.sites.chat_checking import chat_checking
 
 
 def create_app(testing=False):
@@ -26,6 +27,7 @@ def create_app(testing=False):
     app.register_blueprint(auth)
     app.register_blueprint(dashboard)
     app.register_blueprint(player_support)
+    app.register_blueprint(chat_checking)
 
     limiter.init_app(app)
 

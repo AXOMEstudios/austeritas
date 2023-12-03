@@ -1,9 +1,10 @@
 import sched
 import threading
 import time
+
 from ..constants import CLOCK_INTERVAL, DATA_FILENAME
 from ..helpers import load_json, write_json
-from .api import execute_unban, banlist_update_tick
+from .api import banlist_update_tick, execute_unban
 
 s = sched.scheduler()
 

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}
+Austeritas - chat checking
+{% endblock %}
+{% block content %}
+<section class="section">
+    <h1 class="title is-1">
+        {{_("Chat Checking")}}
+    </h1>
+    <p>
+        {{_("Austeritas can check the chat for specific words and phrases in austeritas_config.json.")}}
+        {{_("Players who use them will get banned according to the auto-ban policy.")}}
+        {{_("Below, you can make specific player joins silent the next time they enter the server.")}}
+    </p>
+    <hr>
+
+    <h2>{{_("Edit list of vanished players")}}</h2>
+    {% for player in vanished_players %}
+    <div class="box p-4 my-2">
+        <div class="columns is-mobile">
+            <div class="column p-5">
+                {{player}}
+            </div>
+            <div class="column is-one-fifth py-4">
+                <form action="{{url_for('dashboard.chat_check_remove_vanish')}}" method="post">
+                    <input type="hidden" name="player" value="{{player}}">
+                    <button class="button is-danger">
+                        Un-vanish
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <form action="{{url_for('dashboard.chat_check_add_vanish')}}" method="post">
+        <input class="input my-1" type="text" placeholder="gamertag" name="player">
+        <input class="button is-success my-1 is-fullwidth" value="{{_('Vanish player')}}" type="submit">
+    </form>
+</section>
+{% endblock content %}

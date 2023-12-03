@@ -30,7 +30,9 @@ DATA_SKELETON = {
     "bans": {},
     "appeals": {},
     "messages": [],
-    "admin_responses": {}
+    "admin_responses": {},
+    "vanished": [],
+    "blocklist": [],
 }
 
 CONFIG_SKELETON = {
@@ -51,6 +53,6 @@ with open(CONFIG_FILENAME, "w") as f:
     dump(CONFIG_SKELETON, f, indent=4)
 
 with open(".env", "w") as f:
-    f.write("SECRET_KEY=" + str(uuid.uuid4()) + "-" + str(uuid.uuid4()))
+    f.write("SECRET_KEY=" + str(uuid.uuid4()) + "-" + str(uuid.uuid4()) + '\nCHAT_FILTER_API_KEY=""')
 
 print("Austeritas files have been written successfully.")

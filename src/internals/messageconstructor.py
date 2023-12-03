@@ -1,15 +1,17 @@
-from ..constants import SERVER_NAME
-from flask_babel import gettext
 from datetime import datetime
+
+from flask_babel import gettext
+
+from ..constants import SERVER_NAME
 
 
 class c:
-    bold = "§l"
-    light_green = "§a"
-    green = "§2"
-    red = "§4"
-    warning = "§e"
-    reset = "§r"
+    bold = ""
+    light_green = ""
+    green = ""
+    red = ""
+    warning = ""
+    reset = ""
 
 
 WARNING_MESSAGE_CHAT = f'''{c.red}[Austeritas]{c.reset}: {c.warning}@%s has been warned. The player currently has {c.reset + c.bold}%s{c.reset + c.warning} warnings.'''

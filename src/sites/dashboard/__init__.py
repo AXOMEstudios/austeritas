@@ -1,15 +1,16 @@
 import json
-from multiprocessing import Process
 import random
-from threading import Thread
 import time
 from datetime import datetime
+from multiprocessing import Process
+from threading import Thread
 
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 from flask_babel import gettext
 
 from ... import global_bans
-from ...constants import AUSTERITAS_HOST, CLOCK_INTERVAL, CONFIG_FILENAME, DATA_FILENAME, HAS_HTTPS
+from ...constants import (AUSTERITAS_HOST, CLOCK_INTERVAL, CONFIG_FILENAME,
+                          DATA_FILENAME, HAS_HTTPS)
 from ...helpers import (load_json, login_required, validate_player_name,
                         write_json)
 from ...internals.api import (execute_ban, execute_kick, execute_unban,
@@ -499,3 +500,31 @@ def resolve_macro_check(id_: int):
         status="success",
         message="Resolved. Thanks for your time."
     )
+
+
+@dashboard.route("/chat-checking")
+@login_required
+def chat_check_view():
+    return render_template("dashboard/chat_checking.html", vanished_players = load_json(DATA_FILENAME)["vanished"])
+
+
+@dashboard.route("/chat-checking/vanish/add", methods=["POST"])
+@login_required
+def chat_check_add_vanish():
+    data = request.form
+    _tmp = load_json(DATA_FILENAME)
+    _tmp["vanished"].append(data["player"])
+    write_json(_tmp, DATA_FILENAME)
+
+    return redirect(url_for("dashboard.chat_check_view"))
+
+
+@dashboard.route("/chat-checking/vanish/remove", methods=["POST"])
+@login_required
+def chat_check_remove_vanish():
+    data = request.form
+    _tmp = load_json(DATA_FILENAME)
+    _tmp["vanished"].remove(data["player"])
+    write_json(_tmp, DATA_FILENAME)
+
+    return redirect(url_for("dashboard.chat_check_view"))
