@@ -10,3 +10,7 @@ PUBLIC_ROUTES = [
 UNPROTECTED_ROUTES = [
     "/static/"
 ]
+
+IGNORED_ROUTES = [
+    "dashboard.resolve_macro_check"
+]
