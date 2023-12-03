@@ -460,7 +460,8 @@ def run_macro_check():
                              "text": "[Austeritas] !!! IMMEDIATE ATTENTION REQUIRED: You are being macro checked.\
  Please open the following URL to resolve the check: %s   !!!" % ("https" if HAS_HTTPS else "http" + "://" + AUSTERITAS_HOST + "/dashboard/rmc/" + str(id_)),
                             "color": "red",
-                            "bold": True
+                            "bold": True,
+                            "clickEvent": {"action": "open_url","value": ("https" if HAS_HTTPS else "http" + "://" + AUSTERITAS_HOST + "/dashboard/rmc/" + str(id_))}
                         }))
 
     flash(gettext("Macro check sent."), "success")
