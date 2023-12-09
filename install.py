@@ -32,7 +32,6 @@ DATA_SKELETON = {
     "messages": [],
     "admin_responses": {},
     "vanished": [],
-    "blocklist": [],
 }
 
 CONFIG_SKELETON = {
@@ -43,7 +42,8 @@ CONFIG_SKELETON = {
         "max_warnings": 3,
         "duration-dimension": "days",
         "duration": 2
-    }
+    },
+    "blocklist": [],
 }
 
 with open(DATA_FILENAME, "w") as f:
