@@ -47,19 +47,12 @@ def check_join_message():
 def check_message():
     json_ = request.get_json()
     player = json_["player_display_name"]
-    text = json_["text"]
+    text = normalize(json_["text"])
 
     allow_message = True
 
-    words = re.split('\W+', text)
-
-    for word in words:
-        if normalize(word) in blocklist:
-            allow_message = False
-            break
-
-    for word in blocklist:
-        if word in normalize(text):
+    for expression in blocklist:
+        if re.search(expression, text):
             allow_message = False
             break
 
